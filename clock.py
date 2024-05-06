@@ -1,22 +1,41 @@
-from tkinter import Tk
-from tkinter import Label
+from tkinter import Tk, Label, StringVar
+from tkinter.ttk import Combobox
 import time
-import sys
 
-dc = Tk()
-dc.title("Digital Clock")
-dc.config(bg="black")
+win = Tk()
+win.title("Digital Clock")
+win.config(bg="white")
+
+# size
+win.geometry("500x400")
+win.minsize(width=400, height=200)
+
+# bg
+win.config(bg="skyblue")
+
+# pinned
+win.attributes("-topmost", 1)
 
 def get_time():
     timeVar = time.strftime("%H:%M:%S %p")
     clock.config(text=timeVar)
     clock.after(200,get_time)
 
-title = Label(dc, font=("Arial",35), text="clock", fg="white", bg="black")
+title = Label(win, font=("Dina",35), text="clock", fg="black", bg="white")
 title.pack(anchor='w')
-clock = Label(dc, text="", font=("Helvetica",48), fg="white", bg="black")
+
+#choices
+choices = ['digital clock', 'analog clock']
+variable = StringVar(win)
+variable.set('GB')
+
+w = Combobox(win, values = choices)
+w.pack()
+
+clock = Label(win, text="", font=("Helvetica",48), fg="black", bg="white")
 clock.pack()
+
 
 get_time()
 
-dc.mainloop()
+win.mainloop()
