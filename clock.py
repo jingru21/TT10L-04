@@ -11,7 +11,7 @@ win.geometry("500x400")
 win.minsize(width=400, height=200)
 
 # bg
-win.config(bg="skyblue")
+win.config(bg="white")
 
 # pinned
 win.attributes("-topmost", 1)
