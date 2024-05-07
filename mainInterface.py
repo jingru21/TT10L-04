@@ -8,9 +8,6 @@ win.title("Almanac")
 win.geometry("500x400")
 win.minsize(width=400, height=200)
 
-# icon
-win.iconbitmap("C:\CSP1123\GitProject\TT10L-04\calendar.ico")
-
 # bg
 win.config(bg="skyblue")
 

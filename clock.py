@@ -27,7 +27,7 @@ title.pack(anchor='w')
 #choices
 choices = ['digital clock', 'analog clock']
 variable = StringVar(win)
-variable.set('GB')
+variable.set('digital clock')
 
 w = Combobox(win, values = choices)
 w.pack()
