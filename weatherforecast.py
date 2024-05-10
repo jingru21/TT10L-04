@@ -39,3 +39,14 @@ def getweather():
         pressure =json_data['main']['pressure']
         humidity =json_data['main']['humidity']
         wind =json_data['wind']['speed']
+
+        t.config(text=f"{temp}°C")  # Update temperature label
+        c.config(text=f"{condition} | FEELS LIKE {temp}°C")
+
+        w.config(text=f"{wind} m/s")
+        h.config(text=f"{humidity}%")
+        d.config(text=f"{description}")
+        p.config(text=f"{pressure} hPa")
+
+    except Exception as e:
+        messagebox.showerror("Weather APP","Invalid Entry")  # Show error message box if any error occurs
