@@ -50,3 +50,65 @@ def getweather():
 
     except Exception as e:
         messagebox.showerror("Weather APP","Invalid Entry")  # Show error message box if any error occurs
+
+
+#search box
+#search_image=PhotoImage(file="search.png")
+search_image = PhotoImage(file=r"C:\calendar\search.png")
+myimage=Label(image=search_image)
+myimage.place(x=10,y=20)
+
+textfield=tk.Entry(root,font=("Arial",25,"bold"),justify="center",width=17,bg="#404040",border=0,fg="white")
+textfield.place(x=80,y=40)
+textfield.focus()
+
+search_icon=PhotoImage(file=r"C:\calendar\search_icon.png")
+myimage_icon=Button(image=search_icon,borderwidth=0, cursor="hand2",bg="#404040",border=0, activebackground="#404040", command=getweather)
+myimage_icon.place(x=390,y=34)
+
+#logo
+logo_image=PhotoImage(file=r"C:\calendar\logo.png")
+logo=Label(image=logo_image)
+logo.place(x=10,y=100)
+
+#button box
+frame_image=PhotoImage(file=r"C:\calendar\box.png")
+frame=Label(image=frame_image)
+frame.pack(padx=5,pady=5,side=BOTTOM)
+
+#time
+name=Label(root,font=("arial",15,"bold"))
+name.place(x=250,y=150)
+clock=Label(root,font=("Helvetica",20))
+clock.place(x=250,y=100)
+
+#label
+label1=Label(root,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1.place(x=40,y=595)
+
+label1=Label(root,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1.place(x=140,y=595)
+
+label1=Label(root,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1.place(x=240,y=595)
+
+label1=Label(root,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1.place(x=350,y=595)
+
+t = Label(root, font=("arial", 70, "bold"), fg="red")
+t.place(x=10, y=350)
+c = Label(root, font=("arial", 15, "bold"))
+c.place(x=10, y=450)
+
+
+w=Label(text="...",font=("arial",9,"bold"))
+w.place(x=81,y=595)
+h=Label(text="...",font=("arial",9,"bold"))
+h.place(x=194,y=595)
+d=Label(text="...",font=("arial",9,"bold"))
+d.place(x=280,y=595)
+p=Label(text="...",font=("arial",9,"bold"))
+p.place(x=400,y=595)
+
+
+root.mainloop()
