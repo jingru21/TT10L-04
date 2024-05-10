@@ -37,7 +37,7 @@ calendar = Calendar(
     disabledforeground="#FFA07A",
     command=on_date_selected
 )
-calendar.pack(padx=10, pady=10)
+calendar.pack(padx=100, pady=100)
 
 #holiday
 events = {
