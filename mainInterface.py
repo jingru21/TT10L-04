@@ -8,7 +8,6 @@ win.title("Almanac")
 win.geometry("500x400")
 win.minsize(width=400, height=200)
 
-
 # pinned
 win.attributes("-topmost", 1)
 
@@ -32,6 +31,7 @@ color_theme.add_command(label='Dark Theme', command=lambda: change_theme("dark")
 color_theme.add_command(label='Light Theme', command=lambda: change_theme("light"))
 color_theme.add_command(label='Blue Theme', command=lambda: change_theme("blue"))
 color_theme.add_command(label='Green Theme', command=lambda: change_theme("green"))
+color_theme.add_command(label='Pink Theme', command=lambda:change_theme("pink"))
 
 # add a submenu
 sub_menu = Menu(file_menu, tearoff=0)
@@ -80,12 +80,13 @@ def change_theme(theme):
     elif theme == "dark":
         win.config(bg="black")
     elif theme == "blue":
-        win.config(bg="#ADD8E6")  # Light Blue
+        win.config(bg="#ADD8E6")
     elif theme == "green":
-        win.config(bg="#90EE90")  # Light Green
- 
+        win.config(bg="#90EE90")
+    elif theme == "pink":
+        win.config(bg="#FFD1D7")
 
-current_theme = "light"
+current_theme = "pink"
 
 change_theme(current_theme)
 
