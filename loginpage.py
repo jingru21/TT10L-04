@@ -75,3 +75,38 @@ class LoginPage:
                             bg='#3047ff', cursor='hand2', activebackground='#3047ff', fg='white')
         self.login.place(x=20, y=10)
 
+        # Forgot password
+        self.forgot_button = Button(self.lgn_frame, text="Forgot Password ?",
+                                    font=("yu gothic ui", 13, "bold underline"), fg="white", relief=FLAT,
+                                    activebackground="#040405"
+                                    , borderwidth=0, background="#040405", cursor="hand2")
+        self.forgot_button.place(x=630, y=510)
+        # Sign Up
+        self.sign_label = Label(self.lgn_frame, text='No account yet?', font=("yu gothic ui", 11, "bold"),
+                                relief=FLAT, borderwidth=0, background="#040405", fg='white')
+        self.sign_label.place(x=550, y=560)
+
+        self.signup_img = ImageTk.PhotoImage(file=r"C:\calendar\images\register.png")
+        self.signup_button_label = Button(self.lgn_frame, image=self.signup_img, bg='#98a65d', cursor="hand2",
+                                          borderwidth=0, background="#040405", activebackground="#040405")
+        self.signup_button_label.place(x=670, y=555, width=111, height=35)
+
+
+        # password
+        self.password_label = Label(self.lgn_frame, text="Password", bg="#040405", fg="#4f4e4d",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.password_label.place(x=550, y=380)
+
+        self.password_entry = Entry(self.lgn_frame, highlightthickness=0, relief=FLAT, bg="#040405", fg="#6b6a69",
+                                    font=("yu gothic ui", 12, "bold"), show="*", insertbackground = '#6b6a69')
+        self.password_entry.place(x=580, y=416, width=244)
+
+        self.password_line = Canvas(self.lgn_frame, width=300, height=2.0, bg="#bdb9b1", highlightthickness=0)
+        self.password_line.place(x=550, y=440)
+        # Password icon
+        self.password_icon = Image.open(r"C:\calendar\images\password_icon.png")
+        photo = ImageTk.PhotoImage(self.password_icon)
+        self.password_icon_label = Label(self.lgn_frame, image=photo, bg='#040405')
+        self.password_icon_label.image = photo
+        self.password_icon_label.place(x=550, y=414)
+
