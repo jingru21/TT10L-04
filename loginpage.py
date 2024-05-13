@@ -46,3 +46,32 @@ class LoginPage:
         self.sign_in_label = Label(self.lgn_frame, text="Sign In", bg="#040405", fg="white",
                                     font=("yu gothic ui", 17, "bold"))
         self.sign_in_label.place(x=650, y=240)
+
+        # username
+        self.username_label = Label(self.lgn_frame, text="Username", bg="#040405", fg="#4f4e4d",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.username_label.place(x=550, y=300)
+
+        self.username_entry = Entry(self.lgn_frame, highlightthickness=0, relief=FLAT, bg="#040405", fg="#6b6a69",
+                                    font=("yu gothic ui ", 12, "bold"), insertbackground = '#6b6a69')
+        self.username_entry.place(x=580, y=335, width=270)
+
+        self.username_line = Canvas(self.lgn_frame, width=300, height=2.0, bg="#bdb9b1", highlightthickness=0)
+        self.username_line.place(x=550, y=359)
+        # Username icon 
+        self.username_icon = Image.open(r"C:\calendar\images\username_icon.png")
+        photo = ImageTk.PhotoImage(self.username_icon)
+        self.username_icon_label = Label(self.lgn_frame, image=photo, bg='#040405')
+        self.username_icon_label.image = photo
+        self.username_icon_label.place(x=550, y=332)
+
+        # login button
+        self.lgn_button = Image.open(r"C:\calendar\images\btn1.png")
+        photo = ImageTk.PhotoImage(self.lgn_button)
+        self.lgn_button_label = Label(self.lgn_frame, image=photo, bg='#040405')
+        self.lgn_button_label.image = photo
+        self.lgn_button_label.place(x=550, y=450)
+        self.login = Button(self.lgn_button_label, text='LOGIN', font=("yu gothic ui", 13, "bold"), width=25, bd=0,
+                            bg='#3047ff', cursor='hand2', activebackground='#3047ff', fg='white')
+        self.login.place(x=20, y=10)
+
