@@ -3,7 +3,7 @@ from tkinter.ttk import Combobox
 import time, math
 
 win = Tk()
-win.title("Digital Clock")
+win.title("Clock")
 win.config(bg="white")
 
 # size
@@ -87,7 +87,7 @@ def on_combobox_change(event):
 #choices
 choices = ['digital clock', 'analog clock']
 variable = StringVar(win)
-variable.set('digital clock')
+variable.set('analog clock')
 
 w = Combobox(win, values = choices)
 w.pack()
