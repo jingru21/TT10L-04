@@ -109,4 +109,38 @@ class LoginPage:
         self.password_icon_label = Label(self.lgn_frame, image=photo, bg='#040405')
         self.password_icon_label.image = photo
         self.password_icon_label.place(x=550, y=414)
+        # show/hide password
+        self.show_image = ImageTk.PhotoImage \
+            (file=r"C:\calendar\images\show.png")
 
+        self.hide_image = ImageTk.PhotoImage \
+            (file=r"C:\calendar\images\hide.png")
+
+        self.show_button = Button(self.lgn_frame, image=self.show_image, command=self.show, relief=FLAT,
+                                  activebackground="white"
+                                  , borderwidth=0, background="white", cursor="hand2")
+        self.show_button.place(x=860, y=420)
+
+    def show(self):
+        self.hide_button = Button(self.lgn_frame, image=self.hide_image, command=self.hide, relief=FLAT,
+                                  activebackground="white"
+                                  , borderwidth=0, background="white", cursor="hand2")
+        self.hide_button.place(x=860, y=420)
+        self.password_entry.config(show='')
+
+    def hide(self):
+        self.show_button = Button(self.lgn_frame, image=self.show_image, command=self.show, relief=FLAT,
+                                  activebackground="white"
+                                  , borderwidth=0, background="white", cursor="hand2")
+        self.show_button.place(x=860, y=420)
+        self.password_entry.config(show='*')
+
+
+def page():
+    window = Tk()
+    LoginPage(window)
+    window.mainloop()
+
+
+if __name__ == '__main__':
+    page()
