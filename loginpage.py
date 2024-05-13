@@ -33,3 +33,16 @@ class LoginPage:
         self.side_image_label = Label(self.lgn_frame, image=photo, bg='#040405')
         self.side_image_label.image = photo
         self.side_image_label.place(x=5, y=100)
+
+        # Sign In Image
+        self.sign_in_image = Image.open(r"C:\calendar\images\hyy.png")
+        photo = ImageTk.PhotoImage(self.sign_in_image)
+        self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg='#040405')
+        self.sign_in_image_label.image = photo
+        self.sign_in_image_label.place(x=620, y=130)
+
+
+        # Sign In label
+        self.sign_in_label = Label(self.lgn_frame, text="Sign In", bg="#040405", fg="white",
+                                    font=("yu gothic ui", 17, "bold"))
+        self.sign_in_label.place(x=650, y=240)
