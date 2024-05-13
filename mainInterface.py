@@ -31,7 +31,7 @@ color_theme.add_command(label='Dark Theme', command=lambda: change_theme("dark")
 color_theme.add_command(label='Light Theme', command=lambda: change_theme("light"))
 color_theme.add_command(label='Blue Theme', command=lambda: change_theme("blue"))
 color_theme.add_command(label='Green Theme', command=lambda: change_theme("green"))
-color_theme.add_command(label='Pink Theme', command=lambda:change_theme("pink"))
+color_theme.add_command(label='Pink Theme', command=lambda: change_theme("pink"))
 
 # add a submenu
 sub_menu = Menu(file_menu, tearoff=0)
@@ -77,23 +77,35 @@ menubar.add_cascade(
 def change_theme(theme):
     if theme == "light":
         win.config(bg="white")
+        update_calendar_colors("#FFB6C1", "#FF69B4", "#FF1493", "#FFB6C1", "#DC143C", "#FFB6C1", "#FFA07A")
     elif theme == "dark":
-        win.config(bg="black")
+        win.config(bg="#1a1625")
+        update_calendar_colors("#282828", "#3f3f3f", "#8b8b8b", "#46424f", "#717171", "#121212", "#5e5a66")
     elif theme == "blue":
         win.config(bg="#ADD8E6")
+        update_calendar_colors("#ADD8E6", "#87CEEB", "#4682B4", "#87CEEB", "#4682B4", "#87CEEB", "#87CEEB")
     elif theme == "green":
         win.config(bg="#90EE90")
+        update_calendar_colors("#90EE90", "#2E8B57", "#3CB371", "#90EE90", "#3CB371", "#90EE90", "#90EE90")
     elif theme == "pink":
         win.config(bg="#FFD1D7")
+        update_calendar_colors("#FFB6C1", "#FF69B4", "#FF1493", "#FFB6C1", "#DC143C", "#FFB6C1", "#FFA07A")
+
+def update_calendar_colors(bg, headersbg, selectbg, weekendbg, othermonthbg, headersfg, weekendfg):
+    calendar.config(background=bg, 
+                    headersbackground=headersbg, 
+                    selectbackground=selectbg, 
+                    weekendbackground=weekendbg, 
+                    othermonthbackground=othermonthbg, 
+                    headersforeground=headersfg, 
+                    weekendforeground=weekendfg)
 
 current_theme = "pink"
-
-change_theme(current_theme)
 
 #calendar
 def on_date_selected():
     selected_date = calendar.get_date()
-    print("Selected date: {selected_date}")
+    print("Selected date:", selected_date)
 
 calendar = Calendar(
     win,
@@ -101,16 +113,6 @@ calendar = Calendar(
     date_pattern="yyyy-mm-dd",
     font="Arial 12",
     foreground="black",
-    background="#FFB6C1",
-    headersbackground="#FF69B4",
-    headersforeground="white",
-    selectforeground="white",
-    selectbackground="#FF1493",
-    weekendforeground="#FF1493",
-    weekendbackground="#FFB6C1",
-    othermonthforeground="#DC143C",
-    othermonthbackground="#FFB6C1",
-    disabledforeground="#FFA07A",
     command=on_date_selected
 )
 calendar.pack(padx=100, pady=100)
@@ -141,5 +143,7 @@ def on_specific_date_selected(event):
 event_label = Label(win, text="", font=("Arial", 12), pady=10)
 event_label.pack()
 calendar.bind("<<CalendarSelected>>", on_specific_date_selected)
+
+change_theme(current_theme)
 
 win.mainloop()
