@@ -7,10 +7,10 @@ from datetime import datetime
 import requests
 import pytz
 
-root=Tk()
-root.title("Weather App")
-rootgeometry=root.geometry("500x650+300+200")
-root.resizable(False,False)
+win=Tk()
+win.title("Weather App")
+wingeometry=win.geometry("500x650+300+200")
+win.resizable(False,False)
 
 def getweather():
     try:
@@ -58,7 +58,7 @@ search_image = PhotoImage(file=r"C:\calendar\search.png")
 myimage=Label(image=search_image)
 myimage.place(x=10,y=20)
 
-textfield=tk.Entry(root,font=("Arial",25,"bold"),justify="center",width=17,bg="#404040",border=0,fg="white")
+textfield=tk.Entry(win,font=("Arial",25,"bold"),justify="center",width=17,bg="#404040",border=0,fg="white")
 textfield.place(x=80,y=40)
 textfield.focus()
 
@@ -77,27 +77,27 @@ frame=Label(image=frame_image)
 frame.pack(padx=5,pady=5,side=BOTTOM)
 
 #time
-name=Label(root,font=("arial",15,"bold"))
+name=Label(win,font=("arial",15,"bold"))
 name.place(x=250,y=150)
-clock=Label(root,font=("Helvetica",20))
+clock=Label(win,font=("Helvetica",20))
 clock.place(x=250,y=100)
 
 #label
-label1=Label(root,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1=Label(win,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
 label1.place(x=40,y=595)
 
-label1=Label(root,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1=Label(win,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
 label1.place(x=140,y=595)
 
-label1=Label(root,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1=Label(win,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
 label1.place(x=240,y=595)
 
-label1=Label(root,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
+label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
 label1.place(x=350,y=595)
 
-t = Label(root, font=("arial", 70, "bold"), fg="red")
+t = Label(win, font=("arial", 70, "bold"), fg="red")
 t.place(x=10, y=350)
-c = Label(root, font=("arial", 15, "bold"))
+c = Label(win, font=("arial", 15, "bold"))
 c.place(x=10, y=450)
 
 
@@ -111,4 +111,4 @@ p=Label(text="...",font=("arial",9,"bold"))
 p.place(x=400,y=595)
 
 
-root.mainloop()
+win.mainloop()
