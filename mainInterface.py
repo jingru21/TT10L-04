@@ -66,13 +66,13 @@ def update_calendar_colors(bg, headersbg, selectbg, weekendbg, othermonthbg, hea
 
 current_theme = "pink"
 
-# frame for calendar
+# frame for calendar and button
 frame = Frame(win)
-frame.pack(pady=20, padx=20)
+frame.pack(pady=20, padx=20, fill='both', expand=1)
 
 #frame for button of theme color
 theme_frame = Frame(frame)
-theme_frame.grid(row=0, column=1, padx=20, pady=20)
+theme_frame.pack(side='left', fill='y', padx=20, pady=20)
 
 #button for theme
 Button(theme_frame, text="Light Theme", command=lambda: change_theme("light")).pack(fill='x')
@@ -95,7 +95,7 @@ calendar = Calendar(
     foreground="black",
     command=on_date_selected
 )
-calendar.grid(row=0, column=0, padx=20, pady=20)
+calendar.pack(side='right', padx=20, pady=20, fill='both', expand=1)
 
 #holiday
 events = {
