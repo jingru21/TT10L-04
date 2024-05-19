@@ -16,14 +16,18 @@ menubar = Menu(win)
 win.config(menu=menubar)
 
 # create the file_menu
-file_menu = Menu(
-    menubar,
-    tearoff=0
-)
-
-# add menu items to the File menu
+file_menu = Menu(menubar,tearoff=0)
 file_menu.add_command(label='Close')
 file_menu.add_separator()
+file_menu.add_command(label='Exit',command=win.destroy)
+
+menubar.add_cascade(label="File",menu=file_menu,underline=0)
+
+# help menu
+help_menu = Menu(menubar,tearoff=0)
+help_menu.add_command(label='About...')
+# help menu at menubar
+menubar.add_cascade(label="Help",menu=help_menu,underline=0)
 
 # add more selections from color theme
 color_theme = Menu(file_menu, tearoff=0)
@@ -32,47 +36,6 @@ color_theme.add_command(label='Light Theme', command=lambda: change_theme("light
 color_theme.add_command(label='Blue Theme', command=lambda: change_theme("blue"))
 color_theme.add_command(label='Green Theme', command=lambda: change_theme("green"))
 color_theme.add_command(label='Pink Theme', command=lambda: change_theme("pink"))
-
-# add a submenu
-sub_menu = Menu(file_menu, tearoff=0)
-sub_menu.add_cascade(
-    label='Color Themes',
-    menu=color_theme
-)
-
-# add the File menu to the menubar
-file_menu.add_cascade(
-    label="Preferences",
-    menu=sub_menu
-)
-
-# add Exit menu item
-file_menu.add_separator()
-file_menu.add_command(
-    label='Exit',
-    command=win.destroy
-)
-
-menubar.add_cascade(
-    label="File",
-    menu=file_menu,
-    underline=0
-)
-
-# create the Help menu
-help_menu = Menu(
-    menubar,
-    tearoff=0
-)
-
-help_menu.add_command(label='About...')
-
-# add the Help menu to the menubar
-menubar.add_cascade(
-    label="Help",
-    menu=help_menu,
-    underline=0
-)
 
 def change_theme(theme):
     if theme == "light":
