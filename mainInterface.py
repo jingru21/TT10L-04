@@ -88,14 +88,14 @@ def on_date_selected():
     print("Selected date:", selected_date)
 
 calendar = Calendar(
-    win,
+    frame,
     selectmode="day",
     date_pattern="yyyy-mm-dd",
     font="Arial 12",
     foreground="black",
     command=on_date_selected
 )
-calendar.pack(padx=100, pady=100)
+calendar.grid(row=0, column=0, padx=20, pady=20)
 
 #holiday
 events = {
