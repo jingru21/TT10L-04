@@ -40,20 +40,36 @@ color_theme.add_command(label='Pink Theme', command=lambda: change_theme("pink")
 
 def change_theme(theme):
     if theme == "light":
-        win.config(bg="white")
+        bg_color="white"
+        button_bg = "#FFB6C1"
+        button_fg = "black"
         update_calendar_colors("#FFB6C1", "#FF69B4", "#FF1493", "#FFB6C1", "#DC143C", "#FFB6C1", "#FFA07A")
     elif theme == "dark":
-        win.config(bg="#1a1625")
+        bg_color="#1a1625"
+        button_bg = "#282828"
+        button_fg = "white"
         update_calendar_colors("#282828", "#3f3f3f", "#8b8b8b", "#46424f", "#717171", "#121212", "#5e5a66")
     elif theme == "blue":
-        win.config(bg="#ADD8E6")
+        bg_color="#ADD8E6"
+        button_bg = "#87CEEB"
+        button_fg = "black"
         update_calendar_colors("#ADD8E6", "#87CEEB", "#4682B4", "#87CEEB", "#4682B4", "#87CEEB", "#87CEEB")
     elif theme == "green":
-        win.config(bg="#90EE90")
+        bg_color="#90EE90"
+        button_bg = "#2E8B57"
+        button_fg = "black"
         update_calendar_colors("#90EE90", "#2E8B57", "#3CB371", "#90EE90", "#3CB371", "#90EE90", "#90EE90")
     elif theme == "pink":
-        win.config(bg="#FFD1D7")
+        bg_color="#FFD1D7"
+        button_bg = "#FFB6C1"
+        button_fg = "black"
         update_calendar_colors("#FFB6C1", "#FF69B4", "#FF1493", "#FFB6C1", "#DC143C", "#FFB6C1", "#FFA07A")
+    
+    win.config(bg=bg_color)
+    frame.config(bg=bg_color) 
+    theme_frame.config(bg=bg_color)
+    for button in theme_buttons:
+        button.config(bg=button_bg, fg=button_fg)
 
 def update_calendar_colors(bg, headersbg, selectbg, weekendbg, othermonthbg, headersfg, weekendfg):
     calendar.config(background=bg, 
@@ -75,13 +91,17 @@ theme_frame = Frame(frame)
 theme_frame.pack(side='left', fill='y', padx=20, pady=20)
 
 #button for theme
-Button(theme_frame, text="Light Theme", command=lambda: change_theme("light")).pack(fill='x')
-Button(theme_frame, text="Dark Theme", command=lambda: change_theme("dark")).pack(fill='x')
-Button(theme_frame, text="Blue Theme", command=lambda: change_theme("blue")).pack(fill='x')
-Button(theme_frame, text="Green Theme", command=lambda: change_theme("green")).pack(fill='x')
-Button(theme_frame, text="Pink Theme", command=lambda: change_theme("pink")).pack(fill='x')
+theme_buttons = [
+ Button(theme_frame, text="Light Theme", command=lambda: change_theme("light")),
+ Button(theme_frame, text="Dark Theme", command=lambda: change_theme("dark")),
+ Button(theme_frame, text="Blue Theme", command=lambda: change_theme("blue")),
+ Button(theme_frame, text="Green Theme", command=lambda: change_theme("green")),
+ Button(theme_frame, text="Pink Theme", command=lambda: change_theme("pink")),
+]
 
-
+for button in theme_buttons:
+    button.pack(fill='x', pady=2)
+    
 #calendar
 def on_date_selected():
     selected_date = calendar.get_date()
