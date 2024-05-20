@@ -102,13 +102,13 @@ c.place(x=10, y=450)
 
 
 w=Label(text="...",font=("arial",9,"bold"))
-w.place(x=81,y=595)
+w.place(x=81,y=575)
 h=Label(text="...",font=("arial",9,"bold"))
-h.place(x=194,y=595)
+h.place(x=194,y=575)
 d=Label(text="...",font=("arial",9,"bold"))
-d.place(x=280,y=595)
+d.place(x=280,y=575)
 p=Label(text="...",font=("arial",9,"bold"))
-p.place(x=400,y=595)
+p.place(x=400,y=575)
 
 
 win.mainloop()
