@@ -84,16 +84,16 @@ clock.place(x=250,y=100)
 
 #label
 label1=Label(win,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=40,y=595)
+label1.place(x=40,y=575)
 
 label1=Label(win,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=140,y=595)
+label1.place(x=140,y=575)
 
 label1=Label(win,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=240,y=595)
+label1.place(x=240,y=575)
 
 label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=350,y=595)
+label1.place(x=350,y=575)
 
 t = Label(win, font=("arial", 70, "bold"), fg="red")
 t.place(x=10, y=350)
