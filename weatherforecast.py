@@ -83,16 +83,16 @@ clock.place(x=250,y=100)
 
 #label
 label1=Label(win,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=40,y=575)
+label1.place(x=40,y=595)
 
 label1=Label(win,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=140,y=575)
+label1.place(x=140,y=595)
 
 label1=Label(win,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=240,y=575)
+label1.place(x=240,y=595)
 
 label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=350,y=575)
+label1.place(x=350,y=595)
 
 t = Label(win, font=("arial", 70, "bold"), fg="red")
 t.place(x=10, y=350)
@@ -101,13 +101,13 @@ c.place(x=10, y=450)
 
 
 w=Label(text="...",font=("arial",9,"bold"))
-w.place(x=81,y=575)
+w.place(x=81,y=595)
 h=Label(text="...",font=("arial",9,"bold"))
-h.place(x=194,y=575)
+h.place(x=194,y=595)
 d=Label(text="...",font=("arial",9,"bold"))
-d.place(x=280,y=575)
+d.place(x=280,y=595)
 p=Label(text="...",font=("arial",9,"bold"))
-p.place(x=400,y=575)
+p.place(x=400,y=595)
 
 
 win.mainloop()
