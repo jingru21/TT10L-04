@@ -89,7 +89,7 @@ label1=Label(win,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="whit
 label1.place(x=140,y=575)
 
 label1=Label(win,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=240,y=575)
+label1.place(x=220,y=575)
 
 label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
 label1.place(x=350,y=575)
@@ -103,9 +103,9 @@ c.place(x=10, y=450)
 w=Label(text="...",font=("arial",9,"bold"))
 w.place(x=81,y=575)
 h=Label(text="...",font=("arial",9,"bold"))
-h.place(x=194,y=575)
+h.place(x=190,y=575)
 d=Label(text="...",font=("arial",9,"bold"))
-d.place(x=280,y=575)
+d.place(x=260,y=575)
 p=Label(text="...",font=("arial",9,"bold"))
 p.place(x=400,y=575)
 
