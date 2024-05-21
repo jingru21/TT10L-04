@@ -53,7 +53,7 @@ def getweather():
 
 
 #search box
-search_image = PhotoImage(file=r"C:\spcalendar\TT10L-04\images_weather\search.png")
+search_image = PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\images_weather\search.png")
 myimage=Label(image=search_image)
 myimage.place(x=10,y=20)
 
@@ -61,17 +61,17 @@ textfield=tk.Entry(win,font=("Arial",25,"bold"),justify="center",width=17,bg="#4
 textfield.place(x=80,y=40)
 textfield.focus()
 
-search_icon=PhotoImage(file=r"C:\spcalendar\TT10L-04\images_weather\search_icon.png")
+search_icon=PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\images_weather\search_icon.png")
 myimage_icon=Button(image=search_icon,borderwidth=0, cursor="hand2",bg="#404040",border=0, activebackground="#404040", command=getweather)
 myimage_icon.place(x=390,y=34)
 
 #logo
-logo_image=PhotoImage(file=r"C:\spcalendar\TT10L-04\images_weather\logo.png")
+logo_image=PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\images_weather\logo.png")
 logo=Label(image=logo_image)
 logo.place(x=10,y=100)
 
 #button box
-frame_image=PhotoImage(file=r"C:\spcalendar\TT10L-04\images_weather\box.png")
+frame_image=PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\images_weather\box.png")
 frame=Label(image=frame_image)
 frame.pack(padx=5,pady=5,side=BOTTOM)
 
@@ -83,16 +83,16 @@ clock.place(x=250,y=100)
 
 #label
 label1=Label(win,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=40,y=595)
+label1.place(x=40,y=575)
 
 label1=Label(win,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=140,y=595)
+label1.place(x=140,y=575)
 
 label1=Label(win,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=240,y=595)
+label1.place(x=240,y=575)
 
 label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=350,y=595)
+label1.place(x=350,y=575)
 
 t = Label(win, font=("arial", 70, "bold"), fg="red")
 t.place(x=10, y=350)
@@ -101,13 +101,13 @@ c.place(x=10, y=450)
 
 
 w=Label(text="...",font=("arial",9,"bold"))
-w.place(x=81,y=595)
+w.place(x=81,y=575)
 h=Label(text="...",font=("arial",9,"bold"))
-h.place(x=194,y=595)
+h.place(x=194,y=575)
 d=Label(text="...",font=("arial",9,"bold"))
-d.place(x=280,y=595)
+d.place(x=280,y=575)
 p=Label(text="...",font=("arial",9,"bold"))
-p.place(x=400,y=595)
+p.place(x=400,y=575)
 
 
 win.mainloop()
