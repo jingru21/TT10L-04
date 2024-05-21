@@ -2,6 +2,7 @@ import os
 def add_task(tasks,description,due_date):
     tasks.append({"description": description,"due_date": due_date})
 def view_task(task):
+    global  tasks
     if not tasks:
         print("No Tasks Found.")
     else:
@@ -55,7 +56,7 @@ def main():
         elif choice =="4":
             print("Exiting the Program")
             break
-        elif :
+        else :
             print("Invalid Choice. Please Try again")
 
 if __name__ == "__main__":
