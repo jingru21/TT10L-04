@@ -1,64 +1,93 @@
+import pygame
+import sys
+from button import Button  # Assuming you have a Button class implemented in button.py
 
+pygame.init()
 
-# Set the default time for work and break intervals
-WORK_TIME = 25 * 60
-SHORT_BREAK_TIME = 5 * 60
-LONG_BREAK_TIME = 15 * 60
+# Screen dimensions
+WIDTH, HEIGHT = 900, 600
+SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Pomodoro Timer")
 
+# Clock for controlling frame rate
+CLOCK = pygame.time.Clock()
 
-class PomodoroTimer:
-    def __init__(self):
-        self.root = tk.Tk()
-        self.root.geometry("200x200")
-        self.root.title("Pomodoro Timer")
-        self.style = Style(theme="simplex")
-        self.style.theme_use()
+# Load images
+BACKDROP = pygame.image.load("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\blue.png.png")
+WHITE_BUTTON = pygame.image.load("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\button.png")
 
-        self.timer_label = tk.Label(self.root, text="", font=("TkDefaultFont", 40))
-        self.timer_label.pack(pady=20)
+# Load font
+FONT = pygame.font.Font("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\ArialRoundedMTBold.ttf", 120)
 
-        self.start_button = ttk.Button(self.root, text="Start", command=self.start_timer)
-        self.start_button.pack(pady=5)
+# Initial timer settings
+POMODORO_LENGTH = 25 * 60  # 25 minutes in seconds
+SHORT_BREAK_LENGTH = 5 * 60  # 5 minutes in seconds
+LONG_BREAK_LENGTH = 15 * 60  # 15 minutes in seconds
 
-        self.stop_button = ttk.Button(self.root, text="Stop", command=self.stop_timer,
-                                      state=tk.DISABLED)
-        self.stop_button.pack(pady=5)
+# Create buttons
+START_STOP_BUTTON = Button(WHITE_BUTTON, (WIDTH/2, HEIGHT/2+100), 170, 60, "START", 
+                    pygame.font.Font("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\ArialRoundedMTBold.ttf", 20), 
+                    "#c97676", "#9ab034")
+POMODORO_BUTTON = Button(None, (WIDTH/2-150, HEIGHT/2-140), 120, 30, "Pomodoro", 
+                pygame.font.Font("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\ArialRoundedMTBold.ttf", 20), 
+                "#FFFFFF", "#9ab034")
+SHORT_BREAK_BUTTON = Button(None, (WIDTH/2, HEIGHT/2-140), 120, 30, "Short Break", 
+                            pygame.font.Font("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\ArialRoundedMTBold.ttf", 20), 
+                            "#FFFFFF", "#9ab034")
+LONG_BREAK_BUTTON = Button(None, (WIDTH/2+150, HEIGHT/2-140), 120, 30, "Long Break", 
+                    pygame.font.Font("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\ArialRoundedMTBold.ttf", 20), 
+                        "#FFFFFF", "#9ab034")
 
-        self.work_time, self.break_time = WORK_TIME, SHORT_BREAK_TIME
-        self.is_work_time, self.pomodoro_completed, self.is_running = True, 0, False
+# Initial timer state
+current_seconds = POMODORO_LENGTH
+started = False
 
-        self.root.mainloop()
+# Main loop
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if START_STOP_BUTTON.check_for_input(pygame.mouse.get_pos()):
+                started = not started  # Toggle the timer state
+            elif POMODORO_BUTTON.check_for_input(pygame.mouse.get_pos()):
+                current_seconds = POMODORO_LENGTH
+                started = False
+            elif SHORT_BREAK_BUTTON.check_for_input(pygame.mouse.get_pos()):
+                current_seconds = SHORT_BREAK_LENGTH
+                started = False
+            elif LONG_BREAK_BUTTON.check_for_input(pygame.mouse.get_pos()):
+                current_seconds = LONG_BREAK_LENGTH
+                started = False
 
-    def start_timer(self):
-        self.start_button.config(state=tk.DISABLED)
-        self.stop_button.config(state=tk.NORMAL)
-        self.is_running = True
-        self.update_timer()
+    # Update timer if started
+    if started and current_seconds > 0:
+        current_seconds -= 1
 
-    def stop_timer(self):
-        self.start_button.config(state=tk.NORMAL)
-        self.stop_button.config(state=tk.DISABLED)
-        self.is_running = False
+    # Clear the screen
+    SCREEN.fill("#ba4949")
 
-    def update_timer(self):
-        if self.is_running:
-            if self.is_work_time:
-                self.work_time -= 1
-                if self.work_time == 0:
-                    self.is_work_time = False
-                    self.pomodoro_completed += 1
-                    self.break_time = LONG_BREAK_TIME if self.pomodoro_completed % 4 == 0 else SHORT_BREAK_TIME
-                    messagebox.showinfo("Great Job!" if self.pomodoro_completed % 4 == 0
-                                        else "Good Job!", "Take a long break and rest your mind."
-                                        if self.pomodoro_completed % 4 == 0
-                                        else "Take a short break and stretch your legs!")
-            else:
-                self.break_time -= 1
-                if self.break_time == 0:
-                    self.is_work_time, self.work_time = True, WORK_TIME
-                    messagebox.showinfo("Work Time", "Get back to work!")
-            minutes, seconds = divmod(self.work_time if self.is_work_time else self.break_time, 60)
-            self.timer_label.config(text="{:02d}:{:02d}".format(minutes, seconds))
-            self.root.after(1000, self.update_timer)
+    # Draw the backdrop
+    SCREEN.blit(BACKDROP, BACKDROP.get_rect(center=(WIDTH/2, HEIGHT/2)))
 
-PomodoroTimer()
+    # Update and draw buttons
+    START_STOP_BUTTON.update(SCREEN)
+    POMODORO_BUTTON.update(SCREEN)
+    SHORT_BREAK_BUTTON.update(SCREEN)
+    LONG_BREAK_BUTTON.update(SCREEN)
+
+    # Render timer text
+    display_hours = current_seconds // 3600
+    remaining_seconds = current_seconds % 3600
+    display_minutes = remaining_seconds // 60
+    display_seconds = remaining_seconds % 60
+    timer_text = FONT.render(f"{display_hours:02}:{display_minutes:02}:{display_seconds:02}", True, "white")
+    timer_text_rect = timer_text.get_rect(center=(WIDTH/2, HEIGHT/2-25))
+    SCREEN.blit(timer_text, timer_text_rect)
+
+    # Update the display
+    pygame.display.update()
+
+    # Cap the frame rate
+    CLOCK.tick(60)
