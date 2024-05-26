@@ -19,6 +19,9 @@ WHITE_BUTTON = pygame.image.load("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\
 # Load font
 FONT = pygame.font.Font("C:\\Users\\User\\Downloads\\CSP1123_Group-04\\pomodoro\\ArialRoundedMTBold.ttf", 120)
 
+# Load music
+pygame.mixer.music.load("bgm.mp3.mp3")  
+
 # Initial timer settings
 POMODORO_LENGTH = 25 * 60  # 25 minutes in seconds
 SHORT_BREAK_LENGTH = 5 * 60  # 5 minutes in seconds
@@ -94,6 +97,7 @@ while True:
     LONG_BREAK_BUTTON.change_color(pygame.mouse.get_pos()) 
     SHORT_BREAK_BUTTON.update(SCREEN)
     SHORT_BREAK_BUTTON.change_color(pygame.mouse.get_pos())
+
     # Update the display
     pygame.display.update()
 
