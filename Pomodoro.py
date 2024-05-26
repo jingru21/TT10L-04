@@ -86,6 +86,14 @@ while True:
     timer_text_rect = timer_text.get_rect(center=(WIDTH/2, HEIGHT/2-25))
     SCREEN.blit(timer_text, timer_text_rect)
 
+    START_STOP_BUTTON.update(SCREEN)
+    START_STOP_BUTTON.change_color(pygame.mouse.get_pos())
+    POMODORO_BUTTON.update(SCREEN)
+    POMODORO_BUTTON.change_color(pygame.mouse.get_pos())
+    LONG_BREAK_BUTTON.update(SCREEN)
+    LONG_BREAK_BUTTON.change_color(pygame.mouse.get_pos()) 
+    SHORT_BREAK_BUTTON.update(SCREEN)
+    SHORT_BREAK_BUTTON.change_color(pygame.mouse.get_pos())
     # Update the display
     pygame.display.update()
 
