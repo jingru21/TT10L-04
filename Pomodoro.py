@@ -12,7 +12,6 @@ win.minsize(width=400, height=200)
 
 # pinned
 win.attributes("-topmost", 1)
-
 pygame.init()
 
 # Screen dimensions
