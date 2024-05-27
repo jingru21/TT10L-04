@@ -11,6 +11,7 @@ win=Tk()
 win.title("Weather App")
 wingeometry=win.geometry("500x650+300+200")
 win.resizable(False,False)
+win.attributes("-topmost", 1)
 
 def getweather():
     try:
