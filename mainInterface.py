@@ -41,14 +41,24 @@ color_theme.add_command(label='Pink Theme', command=lambda: change_theme("pink")
 def change_theme(theme):
     if theme == "light":
         bg_color="white"
+<<<<<<< HEAD
         button_bg = "#EDEDE9"
         button_fg = "black"
         update_calendar_colors("#F5EBE0", "#D5BDAF", "#E3D5CA", "#D6CCC2", "#E3D5CA", "black", "black")
+=======
+        button_bg = "#f7f5bc"
+        button_fg = "black"
+        update_calendar_colors("#ece75f", "#f7f5bc", "#f1ee8e", "#ece75f", "#e6cc00", "#e47200", "black")
+>>>>>>> 15f345d2edc716fd72043e3f023456f2dbe0719a
     elif theme == "dark":
         bg_color="#1a1625"
         button_bg = "#282828"
         button_fg = "white"
+<<<<<<< HEAD
         update_calendar_colors("#282828", "#3f3f3f", "#8b8b8b", "#46424f", "#717171", "black", "black")
+=======
+        update_calendar_colors("#282828", "#3f3f3f", "#8b8b8b", "#717171", "#46424f", "#121212", "black")
+>>>>>>> 15f345d2edc716fd72043e3f023456f2dbe0719a
     elif theme == "blue":
         bg_color="#ADD8E6"
         button_bg = "#87CEEB"
