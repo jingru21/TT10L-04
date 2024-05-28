@@ -41,29 +41,29 @@ color_theme.add_command(label='Pink Theme', command=lambda: change_theme("pink")
 def change_theme(theme):
     if theme == "light":
         bg_color="white"
-        button_bg = "#FFB6C1"
+        button_bg = "#EDEDE9"
         button_fg = "black"
-        update_calendar_colors("#FFB6C1", "#FF69B4", "#FF1493", "#FFB6C1", "#DC143C", "#FFB6C1", "#FFA07A")
+        update_calendar_colors("#F5EBE0", "#D5BDAF", "#E3D5CA", "#D6CCC2", "#E3D5CA", "black", "black")
     elif theme == "dark":
         bg_color="#1a1625"
         button_bg = "#282828"
         button_fg = "white"
-        update_calendar_colors("#282828", "#3f3f3f", "#8b8b8b", "#46424f", "#717171", "#121212", "#5e5a66")
+        update_calendar_colors("#282828", "#3f3f3f", "#8b8b8b", "#46424f", "#717171", "black", "black")
     elif theme == "blue":
         bg_color="#ADD8E6"
         button_bg = "#87CEEB"
         button_fg = "black"
-        update_calendar_colors("#ADD8E6", "#87CEEB", "#4682B4", "#87CEEB", "#4682B4", "#87CEEB", "#87CEEB")
+        update_calendar_colors("#61A5C2", "#2C7DA0", "#468FAF", "#A9D6E5", "#89C2D9", "black", "black")
     elif theme == "green":
         bg_color="#90EE90"
         button_bg = "#2E8B57"
         button_fg = "black"
-        update_calendar_colors("#90EE90", "#2E8B57", "#3CB371", "#90EE90", "#3CB371", "#90EE90", "#90EE90")
+        update_calendar_colors("#3A5A40", "#588157", "#90EE90", "#3CB371", "#344E41", "black", "black")
     elif theme == "pink":
         bg_color="#FFD1D7"
         button_bg = "#FFB6C1"
         button_fg = "black"
-        update_calendar_colors("#FFB6C1", "#FF69B4", "#FF1493", "#FFB6C1", "#DC143C", "#FFB6C1", "#FFA07A")
+        update_calendar_colors("#FFB6C1", "#FF99AC", "#FF69B4", "#F7CAD0", "#FF477E", "black", "black")
     
     win.config(bg=bg_color)
     frame.config(bg=bg_color) 
