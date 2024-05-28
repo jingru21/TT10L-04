@@ -11,6 +11,12 @@ win.minsize(width=400, height=200)
 #bgcolor
 win.config(bg="#797EF6")
 
+<<<<<<< HEAD
+#bgcolor
+win.config(bg="#797EF6")
+
+=======
+>>>>>>> a4b810de8a8ebff762473d3e19af35ff4950393d
 label = Label(win, text="Welcome to Almanac!!!", font=("Comic Sans MS", 50), bg="#797EF6", fg="white")
 label.pack(pady=20, side="top")
 
@@ -29,7 +35,10 @@ def open_weather():
 import_button = [
     Button(win,text="Calendar", command=open_calendar,bg="lightblue", fg="black", font=("Comic Sans MS", 12),width=20, height=2),
     Button(win,text="Weather Forecast", command=open_weather,bg="lightblue", fg="black", font=("Comic Sans MS", 12),width=20, height=2),
+<<<<<<< HEAD
+=======
     Button(win,text="Pomodoro", command=open_pomodoro,bg="lightblue", fg="black", font=("Comic Sans MS", 12),width=20, height=2),
+>>>>>>> a4b810de8a8ebff762473d3e19af35ff4950393d
     Button(win,text="Clock", command=open_clock, bg="lightblue", fg="black", font=("Comic Sans MS", 12),width=20, height=2),
     Button(win,text="Exit", command=win.destroy, bg="lightblue", fg="black", font=("Comic Sans MS", 12),width=20, height=2)
 ]
