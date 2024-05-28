@@ -87,7 +87,7 @@ def on_combobox_change(event):
 #choices
 choices = ['digital clock', 'analog clock']
 variable = StringVar(win)
-variable.set('analog clock')
+variable.set('digital clock')
 
 w = Combobox(win, values = choices)
 w.pack()
