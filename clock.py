@@ -1,5 +1,4 @@
-from tkinter import Tk, Label, StringVar, Canvas
-from tkinter.ttk import Combobox
+from tkinter import Tk, Label, Canvas, Button
 import time, math
 
 win = Tk()
@@ -10,7 +9,7 @@ win.config(bg="white")
 win.geometry("500x400")
 win.minsize(width=400, height=200)
 
-# bg
+#bgcolor
 win.config(bg="white")
 
 # pinned
@@ -73,33 +72,26 @@ def update_analog_clock():
 
     analog_clock.after(1000, update_analog_clock)
 
-def on_combobox_change(event):
-    selected_option = variable.get()
-    if selected_option == 'digital clock':
-        analog_clock.pack_forget()
-        digital_clock.pack()
-        update_digital_clock()
-    elif selected_option == 'analog clock':
-        digital_clock.pack_forget()
-        analog_clock.pack()
-        update_analog_clock()
-
-#choices
-choices = ['digital clock', 'analog clock']
-variable = StringVar(win)
-variable.set('analog clock')
-
-w = Combobox(win, values = choices)
-w.pack()
-w.bind("<<ComboboxSelected>>", on_combobox_change)
-
 WIDTH = 400
 HEIGHT = 400
 
 digital_clock = Label(win, text="", font=("Helvetica", 48), fg="black", bg="white")
 analog_clock = Canvas(win, width=WIDTH, height=HEIGHT, bg="white")
 
+analog_clock.pack(pady=(50, 0))
+digital_clock.pack(pady=(20, 50))
+
 update_digital_clock()
 update_analog_clock()
+
+button_clock=Button(text="CLOCK", width=60, height=4)
+button_clock.place(x=0,y=580)
+
+button_world_clock=Button(text="WORLD CLOCK", width=70, height=4)
+button_world_clock.place(x=400,y=580)
+
+button_exit=Button(text="EXIT", command=win.destroy, width=60, height=4)
+button_exit.place(x=900,y=580)
+
 
 win.mainloop()
