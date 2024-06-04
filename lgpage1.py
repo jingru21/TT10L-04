@@ -40,13 +40,13 @@ ConfirmPassword = StringVar()
 # =====================================================================================================================
 # =====================================================================================================================
 
-design_frame1 = Listbox(LoginPage, bg='#0c71b9', width=115, height=50, highlightthickness=0, borderwidth=0)
+design_frame1 = Listbox(LoginPage, bg='#E0B0FF', width=115, height=50, highlightthickness=0, borderwidth=0)
 design_frame1.place(x=0, y=0)
 
-design_frame2 = Listbox(LoginPage, bg='#1e85d0', width=115, height=50, highlightthickness=0, borderwidth=0)
+design_frame2 = Listbox(LoginPage, bg='#B19CD9', width=115, height=50, highlightthickness=0, borderwidth=0)
 design_frame2.place(x=676, y=0)
 
-design_frame3 = Listbox(LoginPage, bg='#1e85d0', width=100, height=33, highlightthickness=0, borderwidth=0)
+design_frame3 = Listbox(LoginPage, bg='#B19CD9', width=100, height=33, highlightthickness=0, borderwidth=0)
 design_frame3.place(x=75, y=106)
 
 design_frame4 = Listbox(LoginPage, bg='#f8f8f8', width=100, height=33, highlightthickness=0, borderwidth=0)
@@ -130,7 +130,7 @@ picture_icon_label.place(x=280, y=5)
 # ===== Left Side Picture ============
 side_image = Image.open(r"C:\spcalendar\TT10L-04\images_login\vector.png")
 photo = ImageTk.PhotoImage(side_image)
-side_image_label = Label(design_frame3, image=photo, bg='#1e85d0')
+side_image_label = Label(design_frame3, image=photo, bg='#B19CD9')
 side_image_label.image = photo
 side_image_label.place(x=50, y=10)
 
@@ -243,13 +243,13 @@ forgotPassword.place(x=290, y=290)
 # =====================================================================================================================
 # =====================================================================================================================
 
-design_frame5 = Listbox(RegistrationPage, bg='#0c71b9', width=115, height=50, highlightthickness=0, borderwidth=0)
+design_frame5 = Listbox(RegistrationPage, bg='#E0B0FF', width=115, height=50, highlightthickness=0, borderwidth=0)
 design_frame5.place(x=0, y=0)
 
-design_frame6 = Listbox(RegistrationPage, bg='#1e85d0', width=115, height=50, highlightthickness=0, borderwidth=0)
+design_frame6 = Listbox(RegistrationPage, bg='#B19CD9', width=115, height=50, highlightthickness=0, borderwidth=0)
 design_frame6.place(x=676, y=0)
 
-design_frame7 = Listbox(RegistrationPage, bg='#1e85d0', width=100, height=33, highlightthickness=0, borderwidth=0)
+design_frame7 = Listbox(RegistrationPage, bg='#B19CD9', width=100, height=33, highlightthickness=0, borderwidth=0)
 design_frame7.place(x=75, y=106)
 
 design_frame8 = Listbox(RegistrationPage, bg='#f8f8f8', width=100, height=33, highlightthickness=0, borderwidth=0)
@@ -361,7 +361,7 @@ picture_icon_label.place(x=280, y=5)
 # ===== Left Side Picture ============
 side_image = Image.open(r"C:\spcalendar\TT10L-04\images_login\vector.png")
 photo = ImageTk.PhotoImage(side_image)
-side_image_label = Label(design_frame7, image=photo, bg='#1e85d0')
+side_image_label = Label(design_frame7, image=photo, bg='#B19CD9')
 side_image_label.image = photo
 side_image_label.place(x=50, y=10)
 
