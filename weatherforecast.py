@@ -6,19 +6,11 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
-<<<<<<< HEAD
-=======
-
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 win=Tk()
 win.title("Weather App")
 wingeometry=win.geometry("500x650+300+200")
 win.resizable(False,False)
 win.attributes("-topmost", 1)
-<<<<<<< HEAD
-=======
-
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 def getweather():
     try:
         city=textfield.get()
@@ -36,10 +28,6 @@ def getweather():
         name.config(text="CURRENT WEATHER")
         #weather
         api="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=27d637bf8af0772aa37a30a5702df3ae"
-<<<<<<< HEAD
-=======
-
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
         json_data=requests.get(api).json()
         print(json_data)
         condition=json_data['weather'][0]['main']
@@ -55,20 +43,12 @@ def getweather():
         h.config(text=f"{humidity}%")
         d.config(text=f"{description}")
         p.config(text=f"{pressure} hPa")
-<<<<<<< HEAD
-=======
-
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
     except Exception as e:
         messagebox.showerror("Weather APP","Invalid Entry")  # Show error message box if any error occurs
 
 
 #search box
-<<<<<<< HEAD
-search_image = PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\image_weather\search.png")
-=======
 search_image = PhotoImage(file=r"image_weather\search.png")
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 myimage=Label(image=search_image)
 myimage.place(x=10,y=20)
 
@@ -76,29 +56,17 @@ textfield=tk.Entry(win,font=("Arial",25,"bold"),justify="center",width=17,bg="#4
 textfield.place(x=80,y=40)
 textfield.focus()
 
-<<<<<<< HEAD
-search_icon=PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\image_weather\search_icon.png")
-=======
 search_icon=PhotoImage(file=r"image_weather\search_icon.png")
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 myimage_icon=Button(image=search_icon,borderwidth=0, cursor="hand2",bg="#404040",border=0, activebackground="#404040", command=getweather)
 myimage_icon.place(x=390,y=34)
 
 #logo
-<<<<<<< HEAD
-logo_image=PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\image_weather\logo.png")
-=======
 logo_image=PhotoImage(file=r"image_weather\logo.png")
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 logo=Label(image=logo_image)
 logo.place(x=10,y=100)
 
 #button box
-<<<<<<< HEAD
-frame_image=PhotoImage(file=r"C:\CSP1123\GitProject\TT10L-04\image_weather\box.png")
-=======
 frame_image=PhotoImage(file=r"image_weather\box.png")
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 frame=Label(image=frame_image)
 frame.pack(padx=5,pady=5,side=BOTTOM)
 
@@ -107,17 +75,6 @@ name=Label(win,font=("arial",15,"bold"))
 name.place(x=250,y=150)
 clock=Label(win,font=("Helvetica",20))
 clock.place(x=250,y=100)
-<<<<<<< HEAD
-#label
-label1=Label(win,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=40,y=575)
-label1=Label(win,text="HUMID",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=140,y=575)
-label1=Label(win,text="INFO",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=220,y=575)
-label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
-label1.place(x=350,y=575)
-=======
 
 #label
 label1=Label(win,text="WIND",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
@@ -132,16 +89,12 @@ label1.place(x=220,y=575)
 label1=Label(win,text="FORCE",font=("Helvetica",10,"bold"),bg="#404040",fg="white")
 label1.place(x=350,y=575)
 
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 t = Label(win, font=("arial", 70, "bold"), fg="red")
 t.place(x=10, y=350)
 c = Label(win, font=("arial", 15, "bold"))
 c.place(x=10, y=450)
-<<<<<<< HEAD
-=======
 
 
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
 w=Label(text="...",font=("arial",9,"bold"))
 w.place(x=81,y=575)
 h=Label(text="...",font=("arial",9,"bold"))
@@ -150,10 +103,6 @@ d=Label(text="...",font=("arial",9,"bold"))
 d.place(x=260,y=575)
 p=Label(text="...",font=("arial",9,"bold"))
 p.place(x=400,y=575)
-<<<<<<< HEAD
-win.mainloop()
-=======
 
 
 win.mainloop()
->>>>>>> f638a20cdad7046e9d909e3389070ae15030437a
