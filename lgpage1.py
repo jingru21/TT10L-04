@@ -1,6 +1,7 @@
 from tkinter import *
-from PIL import ImageTk, Image 
-
+from PIL import ImageTk, Image  
+import sqlite3
+from tkinter import messagebox
 
 window = Tk()
 window.rowconfigure(0, weight=1)
@@ -27,6 +28,12 @@ def show_frame(frame):
 show_frame(LoginPage)
 
 
+# ========== DATABASE VARIABLES ============
+Email = StringVar()
+FullName = StringVar()
+Password = StringVar()
+ConfirmPassword = StringVar()
+
 # =====================================================================================================================
 # =====================================================================================================================
 # ==================== LOGIN PAGE =====================================================================================
@@ -46,14 +53,16 @@ design_frame4 = Listbox(LoginPage, bg='#f8f8f8', width=100, height=33, highlight
 design_frame4.place(x=676, y=106)
 
 # ====== Email ====================
-email_entry = Entry(design_frame4, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2)
+email_entry = Entry(design_frame4, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2,
+                    textvariable=Email)
 email_entry.place(x=134, y=170, width=256, height=34)
 email_entry.config(highlightbackground="black", highlightcolor="black")
 email_label = Label(design_frame4, text='• Email account', fg="#89898b", bg='#f8f8f8', font=("yu gothic ui", 11, 'bold'))
 email_label.place(x=130, y=140)
 
 # ==== Password ==================
-password_entry1 = Entry(design_frame4, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2)
+password_entry1 = Entry(design_frame4, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2,
+                        textvariable=Password)
 password_entry1.place(x=134, y=250, width=256, height=34)
 password_entry1.config(highlightbackground="black", highlightcolor="black")
 password_label = Label(design_frame4, text='• Password', fg="#89898b", bg='#f8f8f8', font=("yu gothic ui", 11, 'bold'))
@@ -91,7 +100,7 @@ login_line.place(x=840, y=203)
 
 # ==== LOGIN  down button ============
 loginBtn1 = Button(design_frame4, fg='#f8f8f8', text='Login', bg='#1b87d2', font=("yu gothic ui bold", 15),
-                   cursor='hand2', activebackground='#1b87d2')
+                   cursor='hand2', activebackground='#1b87d2', command=lambda: login())
 loginBtn1.place(x=133, y=340, width=256, height=50)
 
 
@@ -126,6 +135,29 @@ side_image_label.image = photo
 side_image_label.place(x=50, y=10)
 
 
+# ============ LOGIN DATABASE CONNECTION =========
+connection = sqlite3.connect('RegLog.db')
+cur = connection.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS RegLog(Email TEXT PRIMARY KEY, FullName TEXT, Password TEXT, "
+            "ConfirmPassword TEXT)")
+connection.commit()
+connection.close()
+
+
+def login():
+    conn = sqlite3.connect("RegLog.db")
+    cursor = conn.cursor()
+
+    find_user = 'SELECT * FROM RegLog WHERE Email = ? and Password = ?'
+    cursor.execute(find_user, [(email_entry.get()), (password_entry1.get())])
+
+    result = cursor.fetchall()
+    if result:
+        messagebox.showinfo("Success", 'Logged in Successfully.')
+    else:
+        messagebox.showerror("Failed", "Wrong Login details, please try again.")
+
+
 # ===================================================================================================================
 # ===================================================================================================================
 # === FORGOT PASSWORD  PAGE =========================================================================================
@@ -147,8 +179,14 @@ def forgot_password():
     win.configure(background='#f8f8f8')
     win.resizable(0, 0)
 
+    # Variables
+    email = StringVar()
+    password = StringVar()
+    confirmPassword = StringVar()
+
     # ====== Email ====================
-    email_entry2 = Entry(win, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2)
+    email_entry2 = Entry(win, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2,
+                         textvariable=email)
     email_entry2.place(x=40, y=30, width=256, height=34)
     email_entry2.config(highlightbackground="black", highlightcolor="black")
     email_label2 = Label(win, text='• Email account', fg="#89898b", bg='#f8f8f8',
@@ -156,14 +194,16 @@ def forgot_password():
     email_label2.place(x=40, y=0)
 
     # ====  New Password ==================
-    new_password_entry = Entry(win, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2)
+    new_password_entry = Entry(win, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2,
+                               textvariable=password)
     new_password_entry.place(x=40, y=110, width=256, height=34)
     new_password_entry.config(highlightbackground="black", highlightcolor="black")
     new_password_label = Label(win, text='• New Password', fg="#89898b", bg='#f8f8f8', font=("yu gothic ui", 11, 'bold'))
     new_password_label.place(x=40, y=80)
 
     # ====  Confirm Password ==================
-    confirm_password_entry = Entry(win, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2)
+    confirm_password_entry = Entry(win, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2
+                                   , textvariable=confirmPassword)
     confirm_password_entry.place(x=40, y=190, width=256, height=34)
     confirm_password_entry.config(highlightbackground="black", highlightcolor="black")
     confirm_password_label = Label(win, text='• Confirm Password', fg="#89898b", bg='#f8f8f8',
@@ -172,13 +212,30 @@ def forgot_password():
 
     # ======= Update password Button ============
     update_pass = Button(win, fg='#f8f8f8', text='Update Password', bg='#1b87d2', font=("yu gothic ui bold", 14),
-                         cursor='hand2', activebackground='#1b87d2')
+                         cursor='hand2', activebackground='#1b87d2', command=lambda: change_password())
     update_pass.place(x=40, y=240, width=256, height=50)
+
+    # ========= DATABASE CONNECTION FOR FORGOT PASSWORD=====================
+    def change_password():
+        if new_password_entry.get() == confirm_password_entry.get():
+            db = sqlite3.connect("RegLog.db")
+            curs = db.cursor()
+
+            insert = '''update RegLog set Password=?, ConfirmPassword=? where Email=? '''
+            curs.execute(insert, [new_password_entry.get(), confirm_password_entry.get(), email_entry2.get(), ])
+            db.commit()
+            db.close()
+            messagebox.showinfo('Congrats', 'Password changed successfully')
+
+        else:
+            messagebox.showerror('Error!', "Passwords didn't match")
 
 
 forgotPassword = Button(design_frame4, text='Forgot password', font=("yu gothic ui", 8, "bold underline"), bg='#f8f8f8',
                         borderwidth=0, activebackground='#f8f8f8', command=lambda: forgot_password(), cursor="hand2")
 forgotPassword.place(x=290, y=290)
+
+
 
 # =====================================================================================================================
 # =====================================================================================================================
@@ -199,21 +256,24 @@ design_frame8 = Listbox(RegistrationPage, bg='#f8f8f8', width=100, height=33, hi
 design_frame8.place(x=676, y=106)
 
 # ==== Full Name =======
-name_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2)
+name_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2,
+                   textvariable=FullName)
 name_entry.place(x=284, y=150, width=286, height=34)
 name_entry.config(highlightbackground="black", highlightcolor="black")
 name_label = Label(design_frame8, text='•Full Name', fg="#89898b", bg='#f8f8f8', font=("yu gothic ui", 11, 'bold'))
 name_label.place(x=280, y=120)
 
 # ======= Email ===========
-email_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2)
+email_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2,
+                    textvariable=Email)
 email_entry.place(x=284, y=220, width=286, height=34)
 email_entry.config(highlightbackground="black", highlightcolor="black")
 email_label = Label(design_frame8, text='•Email', fg="#89898b", bg='#f8f8f8', font=("yu gothic ui", 11, 'bold'))
 email_label.place(x=280, y=190)
 
 # ====== Password =========
-password_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2)
+password_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), show='•', highlightthickness=2,
+                       textvariable=Password)
 password_entry.place(x=284, y=295, width=286, height=34)
 password_entry.config(highlightbackground="black", highlightcolor="black")
 password_label = Label(design_frame8, text='• Password', fg="#89898b", bg='#f8f8f8',
@@ -233,7 +293,8 @@ checkButton.place(x=290, y=330)
 
 
 # ====== Confirm Password =============
-confirmPassword_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2)
+confirmPassword_entry = Entry(design_frame8, fg="#a7a7a7", font=("yu gothic ui semibold", 12), highlightthickness=2,
+                              textvariable=ConfirmPassword)
 confirmPassword_entry.place(x=284, y=385, width=286, height=34)
 confirmPassword_entry.config(highlightbackground="black", highlightcolor="black")
 confirmPassword_label = Label(design_frame8, text='• Confirm Password', fg="#89898b", bg='#f8f8f8',
@@ -259,7 +320,7 @@ login_button.place(x=845, y=175)
 
 # ==== SIGN UP down button ============
 signUp2 = Button(design_frame8, fg='#f8f8f8', text='Sign Up', bg='#1b87d2', font=("yu gothic ui bold", 15),
-                 cursor='hand2', activebackground='#1b87d2')
+                 cursor='hand2', activebackground='#1b87d2', command=lambda: submit())
 signUp2.place(x=285, y=435, width=286, height=50)
 
 # ===== password icon =========
@@ -310,6 +371,58 @@ side_image_label.place(x=50, y=10)
 # ==================== DATABASE CONNECTION ============================================================================
 # =====================================================================================================================
 # =====================================================================================================================
+
+connection = sqlite3.connect('RegLog.db')
+cur = connection.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS RegLog(Email TEXT PRIMARY KEY, FullName TEXT, Password TEXT, "
+            "ConfirmPassword TEXT)")
+connection.commit()
+connection.close()
+
+
+def submit():
+    check_counter = 0
+    warn = ""
+    if name_entry.get() == "":
+        warn = "Full Name can't be empty"
+    else:
+        check_counter += 1
+
+    if email_entry.get() == "":
+        warn = "Email Field can't be empty"
+    else:
+        check_counter += 1
+
+    if password_entry.get() == "":
+        warn = "Password can't be empty"
+    else:
+        check_counter += 1
+
+    if confirmPassword_entry.get() == "":
+        warn = "Sorry, can't sign up make sure all fields are complete"
+    else:
+        check_counter += 1
+
+    if password_entry.get() != confirmPassword_entry.get():
+        warn = "Passwords didn't match!"
+    else:
+        check_counter += 1
+
+    if check_counter == 5:
+        try:
+            connection = sqlite3.connect("RegLog.db")
+            cur = connection.cursor()
+            cur.execute("INSERT INTO RegLog values(?,?,?,?)",
+                        (Email.get(), FullName.get(), Password.get(), ConfirmPassword.get()))
+
+            connection.commit()
+            connection.close()
+            messagebox.showinfo("Success", "New account created successfully")
+
+        except Exception as ep:
+            messagebox.showerror('', ep)
+    else:
+        messagebox.showerror('Error', warn)
 
 
 window.mainloop()
