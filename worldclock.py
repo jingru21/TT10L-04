@@ -22,12 +22,10 @@ n = StringVar()
 continents_cb = Combobox(win, width = 27, textvariable = n)
 
 continents_cb['values'] = ('Africa',
-                           'Antarctica',
                            'Asia',
                            'Australia',
                            'Europe',
-                           'North America',
-                           'South America')
+                           'America')
 
 continents_cb.grid(column=1, row=0, padx=10, pady=25)
 
@@ -35,7 +33,33 @@ def continents_changed(event):
     selected_option = continents_cb.get()
     if selected_option == 'Asia':
         update_asia()
+    elif selected_option == 'Africa':
+        update_africa()
         
+def update_africa():
+    home=pytz.timezone('Africa/Cairo')
+    local_time=datetime.now(home)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock.config(text=current_time)
+    name.config(text="Egypt")
+
+    home2=pytz.timezone('Africa/Casablanca')
+    local_time=datetime.now(home2)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock2.config(text=current_time)
+    name2.config(text="Morocco")
+
+    home3=pytz.timezone('Africa/Gaborone')
+    local_time=datetime.now(home3)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock3.config(text=current_time)
+    name3.config(text="Botswana")
+
+    home4=pytz.timezone('Africa/Algiers')
+    local_time=datetime.now(home4)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock4.config(text=current_time)
+    name4.config(text="Algeria")
 
 def update_asia():
     home=pytz.timezone('Asia/Kuala_Lumpur')
@@ -103,6 +127,6 @@ clock4=Label(f4, font=("Helvetica", 20))
 clock4.place(x=5, y=80)
 
 continents_cb.current()
-update_asia()
+continents_cb.bind("<<ComboboxSelected>>",continents_changed)
 
 win.mainloop()
