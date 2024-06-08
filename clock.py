@@ -1,5 +1,7 @@
 from tkinter import Tk, Label, Canvas, Button
-import time, math
+import time, math, os
+
+dirname = os.path.dirname(__file__)
 
 win = Tk()
 win.title("Clock")
@@ -87,7 +89,11 @@ update_analog_clock()
 button_clock=Button(text="CLOCK", width=60, height=4)
 button_clock.place(x=0,y=580)
 
-button_world_clock=Button(text="WORLD CLOCK", width=70, height=4)
+def open_worldclock():
+    worldclock_path = os.path.join(dirname, 'worldclock.py')
+    os.system(f'python "{worldclock_path}"')
+
+button_world_clock=Button(text="WORLD CLOCK", command=open_worldclock, width=70, height=4)
 button_world_clock.place(x=400,y=580)
 
 button_exit=Button(text="EXIT", command=win.destroy, width=60, height=4)
