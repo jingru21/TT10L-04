@@ -23,8 +23,6 @@ def refresh_window():
         update_america()
     elif selected_continent == 'Europe':
         update_europe()
-    elif selected_continent == 'Pacific':
-        update_pacific()
 
 #label
 Label(win, text = "Select the Continents :",
@@ -37,8 +35,7 @@ continents_cb = Combobox(win, width = 27, textvariable = n)
 continents_cb['values'] = ('Africa',
                            'America',
                            'Asia',
-                           'Europe',
-                           'Pacific')
+                           'Europe')
 
 continents_cb.grid(column=1, row=0, padx=10, pady=25)
 
@@ -52,8 +49,6 @@ def continents_changed(event):
         update_america()
     elif selected_option == 'Europe':
         update_europe()
-    elif selected_option == 'Pacific':
-        update_pacific()
         
 def update_africa():
     home=pytz.timezone('Africa/Cairo')
@@ -227,30 +222,29 @@ def update_europe():
     clock4.config(text=current_time)
     name4.config(text="Amsterdam")
 
-def update_pacific():
-    home = pytz.timezone('Pacific/Honolulu')
-    local_time = datetime.now(home)
-    current_time = local_time.strftime("%a %H:%M %p")
-    clock.config(text=current_time)
-    name.config(text="Honolulu")
-
-    home2=pytz.timezone('Pacific/Samoa')
-    local_time=datetime.now(home2)
+    home5=pytz.timezone('Europe/Berlin')
+    local_time=datetime.now(home5)
     current_time=local_time.strftime("%a %H:%M %p")
-    clock2.config(text=current_time)
-    name2.config(text="Samoa")
+    clock5.config(text=current_time)
+    name5.config(text="Berlin")
 
-    home3=pytz.timezone('Pacific/Easter')
-    local_time=datetime.now(home3)
+    home6=pytz.timezone('Europe/Lisbon')
+    local_time=datetime.now(home6)
     current_time=local_time.strftime("%a %H:%M %p")
-    clock3.config(text=current_time)
-    name3.config(text="Easter Island")
+    clock6.config(text=current_time)
+    name6.config(text="Lisbon")
 
-    home4=pytz.timezone('Pacific/Pago_Pago')
-    local_time=datetime.now(home4)
+    home7=pytz.timezone('Europe/Dublin')
+    local_time=datetime.now(home7)
     current_time=local_time.strftime("%a %H:%M %p")
-    clock4.config(text=current_time)
-    name4.config(text="Pago Pago")
+    clock7.config(text=current_time)
+    name7.config(text="Dublin")
+
+    home8=pytz.timezone('Europe/Stockholm')
+    local_time=datetime.now(home8)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock8.config(text=current_time)
+    name8.config(text="Stockholm")
 
 #first
 f=Frame(win, bd=5)
