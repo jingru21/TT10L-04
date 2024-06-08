@@ -15,7 +15,7 @@ win.attributes("-topmost", 1)
 
 #label
 Label(win, text = "Select the Continents :",
-      font = ("Times New Roman", 10)).grid(column = 0, row =5, padx = 10, pady = 25)
+      font = ("Times New Roman", 10)).grid(column = 0, row =0, padx = 10, pady = 25)
 
 #Combobox
 n = StringVar()
@@ -40,35 +40,31 @@ def continents_changed(event):
 def update_asia():
     home=pytz.timezone('Asia/Kuala_Lumpur')
     local_time=datetime.now(home)
-    current_time=local_time.strftime("%a %H:%M:%S %p")
+    current_time=local_time.strftime("%a %H:%M %p")
     clock.config(text=current_time)
     name.config(text="Malaysia")
-    clock.after(200, update_asia)
 
     home2=pytz.timezone('Asia/Kolkata')
     local_time=datetime.now(home2)
-    current_time=local_time.strftime("%a %H:%M:%S %p")
+    current_time=local_time.strftime("%a %H:%M %p")
     clock2.config(text=current_time)
     name2.config(text="India")
-    clock2.after(200, update_asia)
 
     home3=pytz.timezone('Asia/Singapore')
     local_time=datetime.now(home3)
-    current_time=local_time.strftime("%a %H:%M:%S %p")
+    current_time=local_time.strftime("%a %H:%M %p")
     clock3.config(text=current_time)
     name3.config(text="Singapore")
-    clock3.after(200, update_asia)
 
     home4=pytz.timezone('Asia/Tokyo')
     local_time=datetime.now(home4)
-    current_time=local_time.strftime("%a %H:%M:%S %p")
+    current_time=local_time.strftime("%a %H:%M %p")
     clock4.config(text=current_time)
-    name4.config(text="Tokyo,Japan")
-    clock4.after(200, update_asia)
+    name4.config(text="Japan")
 
 #first
 f=Frame(win, bd=5)
-f.place(x=10, y=118, width=300, height=150)
+f.place(x=200, y=118, width=300, height=150)
 
 name=Label(f,font=("Helvetica", 30, "bold"))
 name.place(x=50, y=10)
@@ -78,7 +74,7 @@ clock.place(x=5, y=80)
 
 #second
 f2=Frame(win, bd=5)
-f2.place(x=300, y=118, width=300, height=150)
+f2.place(x=500, y=118, width=300, height=150)
 
 name2=Label(f2,font=("Helvetica", 30, "bold"))
 name2.place(x=30, y=10)
@@ -88,7 +84,7 @@ clock2.place(x=5, y=80)
 
 #third
 f3=Frame(win, bd=5)
-f3.place(x=590, y=118, width=300, height=150)
+f3.place(x=200, y=300, width=300, height=150)
 
 name3=Label(f3,font=("Helvetica", 30, "bold"))
 name3.place(x=30, y=10)
@@ -98,7 +94,7 @@ clock3.place(x=5, y=80)
 
 #fourth
 f4=Frame(win, bd=5)
-f4.place(x=10, y=300, width=300, height=150)
+f4.place(x=500, y=300, width=300, height=150)
 
 name4=Label(f4,font=("Helvetica", 30, "bold"))
 name4.place(x=30, y=10)
