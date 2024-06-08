@@ -80,6 +80,30 @@ def update_africa():
     clock4.config(text=current_time)
     name4.config(text="Algeria")
 
+    home5=pytz.timezone('Africa/Lagos')
+    local_time=datetime.now(home5)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock5.config(text=current_time)
+    name5.config(text="Lagos")
+
+    home6=pytz.timezone('Africa/Nairobi')
+    local_time=datetime.now(home6)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock6.config(text=current_time)
+    name6.config(text="Nairobi")
+
+    home7=pytz.timezone('Africa/Kinshasa')
+    local_time=datetime.now(home7)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock7.config(text=current_time)
+    name7.config(text="Kinshasa")
+
+    home8=pytz.timezone('Africa/Maputo')
+    local_time=datetime.now(home8)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock8.config(text=current_time)
+    name8.config(text="Maputo")
+
 def update_america():
     home = pytz.timezone('America/Los_Angeles')
     local_time = datetime.now(home)
@@ -104,6 +128,30 @@ def update_america():
     current_time=local_time.strftime("%a %H:%M %p")
     clock4.config(text=current_time)
     name4.config(text="Toronto")
+
+    home5=pytz.timezone('America/Chicago')
+    local_time=datetime.now(home5)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock5.config(text=current_time)
+    name5.config(text="Houston")
+
+    home6=pytz.timezone('America/Denver')
+    local_time=datetime.now(home6)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock6.config(text=current_time)
+    name6.config(text="Salt Lake City")
+
+    home7=pytz.timezone('America/Anchorage')
+    local_time=datetime.now(home7)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock7.config(text=current_time)
+    name7.config(text="Anchorage")
+
+    home8=pytz.timezone('America/Phoenix')
+    local_time=datetime.now(home8)
+    current_time=local_time.strftime("%a %H:%M %p")
+    clock8.config(text=current_time)
+    name8.config(text="Phoenix")
 
 def update_asia():
     home=pytz.timezone('Asia/Kuala_Lumpur')
@@ -152,7 +200,7 @@ def update_asia():
     local_time=datetime.now(home8)
     current_time=local_time.strftime("%a %H:%M %p")
     clock8.config(text=current_time)
-    name8.config(text="United Arab Emirates")
+    name8.config(text="Dubai")
 
 def update_europe():
     home = pytz.timezone('Europe/London')
