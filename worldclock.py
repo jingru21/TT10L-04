@@ -327,10 +327,13 @@ clock8=Label(f8, font=("Helvetica", 20))
 clock8.place(x=5, y=80)
 
 refresh_label = Label(win, text="Click the button to refresh the window.", font=("Times New Roman", 12))
-refresh_label.place(x=20, y=320)
+refresh_label.place(x=20, y=500)
 
 refresh_button = Button(win, text="Refresh", command=refresh_window, font=("Times New Roman", 12))
-refresh_button.place(x=300, y=320)
+refresh_button.place(x=300, y=500)
+
+button_exit=Button(win, text="BACK", command=win.destroy, width=30, height=2)
+button_exit.place(x=1000,y=580)
 
 continents_cb.current()
 continents_cb.bind("<<ComboboxSelected>>",continents_changed)
