@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import ImageTk, Image  
 import sqlite3
 from tkinter import messagebox
+import re
 
 window = Tk()
 window.rowconfigure(0, weight=1)
@@ -27,7 +28,9 @@ def show_frame(frame):
 
 show_frame(LoginPage)
 
-
+def validate_email(email):
+    email_regex = r'^[a-zA-Z0-9_.+-]+@gmail\.com$'
+    return re.match(email_regex, email)
 # ========== DATABASE VARIABLES ============
 Email = StringVar()
 FullName = StringVar()
@@ -145,6 +148,10 @@ connection.close()
 
 
 def login():
+    if not validate_email(email_entry.get()):
+        messagebox.showerror("Error", "Invalid email format. Please use a valid email address ending with @gmail.com.")
+        return
+    
     conn = sqlite3.connect("RegLog.db")
     cursor = conn.cursor()
 
@@ -217,6 +224,9 @@ def forgot_password():
 
     # ========= DATABASE CONNECTION FOR FORGOT PASSWORD=====================
     def change_password():
+        if not validate_email(email_entry2.get()):
+            messagebox.showerror("Error", "Invalid email format. Please use a valid email address ending with @gmail.com.")
+            return
         if new_password_entry.get() == confirm_password_entry.get():
             db = sqlite3.connect("RegLog.db")
             curs = db.cursor()
@@ -390,6 +400,8 @@ def submit():
 
     if email_entry.get() == "":
         warn = "Email Field can't be empty"
+    elif not validate_email(email_entry.get()):
+        warn = "Invalid email format. Please use a valid email address ending with @gmail.com."
     else:
         check_counter += 1
 
