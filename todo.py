@@ -4,8 +4,9 @@ from tkinter import messagebox
 class TodoListApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("To-Do List App")
-        self.root.geometry("600x450")
+        self.root.title("To-Do List")
+        self.root.geometry("600x550")
+        self.root.resizable(False, False)
         self.root.config(bg="#34495e") 
         self.tasks = []
 
@@ -38,7 +39,12 @@ class TodoListApp:
         complete_button = tk.Button(root, text="Complete Task", command=self.complete_task, font=('Arial', 12, 'bold'), bg="#f39c12", fg="#ecf0f1")
         complete_button.grid(row=3, column=1, padx=10, pady=10, sticky="ew")
 
+        # Back Button
+        exit_button = tk.Button(root, text="Exit", command=self.root.quit, font=('Arial', 12, 'bold'), bg="#95a5a6", fg="#ecf0f1")
+        exit_button.grid(row=4, column=0, columnspan=2, padx=10, pady=20, sticky="ew")
+
         self.task_listbox.bind('<Double-Button-1>', lambda event: self.complete_task())
+        
 
     def add_task(self):
         task = self.task_entry.get()
