@@ -1,5 +1,8 @@
 from tkinter import Tk , Label, Menu, Frame, Button
 from tkcalendar import Calendar
+import os
+
+dirname = os.path.dirname(__file__)
 
 win = Tk()
 win.title("Almanac")
@@ -15,8 +18,14 @@ win.attributes("-topmost", 1)
 menubar = Menu(win)
 win.config(menu=menubar)
 
+def open_todolist():
+    todolist_path = os.path.join(dirname, 'todo.py')
+    os.system(f'python "{todolist_path}"')
+
 # create the file_menu
 file_menu = Menu(menubar,tearoff=0)
+file_menu.add_command(label='To Do List', command=open_todolist)
+file_menu.add_separator()
 file_menu.add_command(label='Close')
 file_menu.add_separator()
 file_menu.add_command(label='Exit',command=win.destroy)
@@ -26,7 +35,6 @@ menubar.add_cascade(label="File",menu=file_menu,underline=0)
 # help menu
 help_menu = Menu(menubar,tearoff=0)
 help_menu.add_command(label='About...')
-# help menu at menubar
 menubar.add_cascade(label="Help",menu=help_menu,underline=0)
 
 # add more selections from color theme

@@ -96,7 +96,7 @@ def open_worldclock():
 button_world_clock=Button(text="WORLD CLOCK", command=open_worldclock, width=70, height=4)
 button_world_clock.place(x=400,y=580)
 
-button_exit=Button(text="EXIT", command=win.destroy, width=55, height=4)
+button_exit=Button(text="BACK", command=win.destroy, width=55, height=4)
 button_exit.place(x=900,y=580)
 
 
