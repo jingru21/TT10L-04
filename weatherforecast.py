@@ -6,11 +6,13 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
+
 win=Tk()
 win.title("Weather App")
 wingeometry=win.geometry("500x650+300+200")
 win.resizable(False,False)
 win.attributes("-topmost", 1)
+
 def getweather():
     try:
         city=textfield.get()
@@ -26,8 +28,10 @@ def getweather():
         current_time=local_time.strftime("%I:%M %p")
         clock.config(text=current_time)
         name.config(text="CURRENT WEATHER")
+
         #weather
         api="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=27d637bf8af0772aa37a30a5702df3ae"
+
         json_data=requests.get(api).json()
         print(json_data)
         condition=json_data['weather'][0]['main']
@@ -36,6 +40,7 @@ def getweather():
         pressure =json_data['main']['pressure']
         humidity =json_data['main']['humidity']
         wind =json_data['wind']['speed']
+
         t.config(text=f"{temp}°C")  # Update temperature label
         c.config(text=f"{condition} | FEELS LIKE {temp}°C")
 
@@ -43,6 +48,7 @@ def getweather():
         h.config(text=f"{humidity}%")
         d.config(text=f"{description}")
         p.config(text=f"{pressure} hPa")
+
     except Exception as e:
         messagebox.showerror("Weather APP","Invalid Entry")  # Show error message box if any error occurs
 
