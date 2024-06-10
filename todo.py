@@ -5,9 +5,12 @@ class TodoListApp:
     def __init__(self, root):
         self.root = root
         self.root.title("To-Do List App")
-        self.root.geometry("500x400")
+        self.root.geometry("600x400")
         self.root.config(bg="#34495e")  
         self.tasks = []
+
+        title_label = tk.Label(root, text="My To-Do List", font=('Arial', 24, 'bold'), bg="#34495e", fg="#ecf0f1")
+        title_label.grid(row=0, column=0, columnspan=2, pady=20)
 
         self.task_entry = tk.Entry(root, width=40, font=('Arial', 14))
         self.task_entry.grid(row=0, column=0, padx=10, pady=10)
