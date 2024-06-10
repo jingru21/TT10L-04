@@ -8,6 +8,7 @@ class TodoListApp:
         self.root.geometry("600x550")
         self.root.resizable(False, False)
         self.root.config(bg="#34495e") 
+        self.root.attributes("-topmost", 1)
         self.tasks = []
 
         # Title label
