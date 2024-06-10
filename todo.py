@@ -6,10 +6,10 @@ class TodoListApp:
         self.root = root
         self.root.title("To-Do List App")
         self.root.geometry("500x400")
-        self.root.config(bg="#3498db")  
+        self.root.config(bg="#34495e")  
         self.tasks = []
 
-        self.task_entry = tk.Entry(root, width=30, font=('Arial', 14))
+        self.task_entry = tk.Entry(root, width=40, font=('Arial', 14))
         self.task_entry.grid(row=0, column=0, padx=10, pady=10)
 
         add_button = tk.Button(root, text="Add Task", command=self.add_task, font=('Arial', 12), bg="#2ecc71", fg="#ecf0f1")  # Set button colors
