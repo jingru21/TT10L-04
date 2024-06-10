@@ -5,32 +5,38 @@ class TodoListApp:
     def __init__(self, root):
         self.root = root
         self.root.title("To-Do List App")
-        self.root.geometry("600x400")
-        self.root.config(bg="#34495e")  
+        self.root.geometry("600x450")
+        self.root.config(bg="#34495e") 
         self.tasks = []
 
-        title_label = tk.Label(root, text="My To-Do List", font=('Arial', 24, 'bold'), bg="#34495e", fg="#ecf0f1")
+        # Title label
+        title_label = tk.Label(root, text="My To-Do List", font=('Arial', 20, 'bold'), bg="#34495e", fg="#ecf0f1")
         title_label.grid(row=0, column=0, columnspan=2, pady=20)
 
-        self.task_entry = tk.Entry(root, width=40, font=('Arial', 14))
-        self.task_entry.grid(row=1, column=0, padx=20, pady=10)
+        # Task entry
+        self.task_entry = tk.Entry(root, width=35, font=('Arial', 14))
+        self.task_entry.grid(row=1, column=0, padx=10, pady=10)
 
-        add_button = tk.Button(root, text="Add Task", command=self.add_task, font=('Arial', 12), bg="#2ecc71", fg="#ecf0f1")  # Set button colors
+        # Add Task button
+        add_button = tk.Button(root, text="Add Task", command=self.add_task, font=('Arial', 12, 'bold'), bg="#2ecc71", fg="#ecf0f1")
         add_button.grid(row=1, column=1, padx=10, pady=10)
 
-        self.task_listbox = tk.Listbox(root, width=60, height=15, font=('Arial', 12), bg="#ecf0f1", fg="#2c3e50", selectbackground="#3498db")  # Set listbox colors
-        self.task_listbox.grid(row=2, column=0, columnspan=2, padx=20, pady=10)
+        # Task listbox with a scrollbar
+        self.task_listbox = tk.Listbox(root, width=45, height=12, font=('Arial', 12), bg="#ecf0f1", fg="#2c3e50", selectbackground="#3498db")
+        self.task_listbox.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
         scrollbar = tk.Scrollbar(root)
         scrollbar.grid(row=2, column=2, sticky='ns')
         self.task_listbox.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.task_listbox.yview)
 
-        remove_button = tk.Button(root, text="Remove Task", command=self.remove_task, font=('Arial', 12), bg="#e74c3c", fg="#ecf0f1")  # Set button colors
-        remove_button.grid(row=3, column=0, padx=20, pady=10, sticky="ew")
+        # Remove Task button
+        remove_button = tk.Button(root, text="Remove Task", command=self.remove_task, font=('Arial', 12, 'bold'), bg="#e74c3c", fg="#ecf0f1")
+        remove_button.grid(row=3, column=0, padx=10, pady=10, sticky="ew")
 
-        complete_button = tk.Button(root, text="Complete Task", command=self.complete_task, font=('Arial', 12), bg="#f39c12", fg="#ecf0f1")  # Set button colors
-        complete_button.grid(row=3, column=1, padx=20, pady=10, sticky="ew")
+        # Complete Task button
+        complete_button = tk.Button(root, text="Complete Task", command=self.complete_task, font=('Arial', 12, 'bold'), bg="#f39c12", fg="#ecf0f1")
+        complete_button.grid(row=3, column=1, padx=10, pady=10, sticky="ew")
 
         self.task_listbox.bind('<Double-Button-1>', lambda event: self.complete_task())
 
