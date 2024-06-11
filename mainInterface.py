@@ -22,9 +22,15 @@ def open_todolist():
     todolist_path = os.path.join(dirname, 'todo.py')
     os.system(f'python "{todolist_path}"')
 
+def open_reminder():
+    reminder_path = os.path.join(dirname, 'reminder.py')
+    os.system(f'python "{reminder_path}"')
+
 # create the file_menu
 file_menu = Menu(menubar,tearoff=0)
 file_menu.add_command(label='To Do List', command=open_todolist)
+file_menu.add_separator()
+file_menu.add_command(label='Reminder', command=open_reminder)
 file_menu.add_separator()
 file_menu.add_command(label='Close')
 file_menu.add_separator()
