@@ -4,9 +4,11 @@ from tkinter import messagebox
 class TodoListApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("To-Do List App")
-        self.root.geometry("600x450")
-        self.root.config(bg="#34495e")  # Background color for the app
+        self.root.title("To-Do List")
+        self.root.geometry("600x550")
+        self.root.resizable(False, False)
+        self.root.config(bg="#34495e") 
+        self.root.attributes("-topmost", 1)
         self.tasks = []
 
         # Title label
