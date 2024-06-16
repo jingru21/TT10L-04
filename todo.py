@@ -1,44 +1,63 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import simpledialog, messagebox
 
 class TodoListApp:
     def __init__(self, root):
         self.root = root
         self.root.title("To-Do List")
         self.root.geometry("600x550")
-        self.root.resizable(False, False)
-        self.root.config(bg="#34495e") 
-        self.root.attributes("-topmost", 1)
+        self.root.config(bg="#34495e")
+
         self.tasks = []
 
+        # Main frame
+        main_frame = tk.Frame(root, bg="#34495e")
+        main_frame.pack(expand=True, fill='both', padx=20, pady=20)
+
         # Title label
-        title_label = tk.Label(root, text="My To-Do List", font=('Arial', 20, 'bold'), bg="#34495e", fg="#ecf0f1")
-        title_label.grid(row=0, column=0, columnspan=2, pady=20)
+        title_label = tk.Label(main_frame, text="My To-Do List", font=('Arial', 20, 'bold'), bg="#34495e", fg="#ecf0f1")
+        title_label.pack(pady=20)
+
+        # Task entry frame
+        entry_frame = tk.Frame(main_frame, bg="#34495e")
+        entry_frame.pack(pady=10)
 
         # Task entry
-        self.task_entry = tk.Entry(root, width=35, font=('Arial', 14))
-        self.task_entry.grid(row=1, column=0, padx=10, pady=10)
+        self.task_entry = tk.Entry(entry_frame, width=35, font=('Arial', 14))
+        self.task_entry.pack(side='left', padx=10)
 
         # Add Task button
-        add_button = tk.Button(root, text="Add Task", command=self.add_task, font=('Arial', 12, 'bold'), bg="#2ecc71", fg="#ecf0f1")
-        add_button.grid(row=1, column=1, padx=10, pady=10)
+        add_button = tk.Button(entry_frame, text="Add Task", command=self.add_task, font=('Arial', 12, 'bold'), bg="#2ecc71", fg="#ecf0f1")
+        add_button.pack(side='left', padx=10)
+
+        # Task listbox frame
+        listbox_frame = tk.Frame(main_frame, bg="#34495e")
+        listbox_frame.pack(pady=10, expand=True, fill='both')
 
         # Task listbox with a scrollbar
-        self.task_listbox = tk.Listbox(root, width=60, height=12, font=('Arial', 12), bg="#ecf0f1", fg="#2c3e50", selectbackground="#3498db")
-        self.task_listbox.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        self.task_listbox = tk.Listbox(listbox_frame, font=('Arial', 12), bg="#ecf0f1", fg="#2c3e50", selectbackground="#3498db")
+        self.task_listbox.pack(side='left', fill='both', expand=True, padx=10, pady=10)
 
-        scrollbar = tk.Scrollbar(root)
-        scrollbar.grid(row=2, column=2, sticky='ns')
+        scrollbar = tk.Scrollbar(listbox_frame)
+        scrollbar.pack(side='left', fill='y')
         self.task_listbox.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.task_listbox.yview)
 
+        # Buttons frame
+        button_frame = tk.Frame(main_frame, bg="#34495e")
+        button_frame.pack(pady=10)
+
         # Remove Task button
-        remove_button = tk.Button(root, text="Remove Task", command=self.remove_task, font=('Arial', 12, 'bold'), bg="#e74c3c", fg="#ecf0f1")
-        remove_button.grid(row=3, column=0, padx=10, pady=10, sticky="ew")
+        remove_button = tk.Button(button_frame, text="Remove Task", command=self.remove_task, font=('Arial', 12, 'bold'), bg="#e74c3c", fg="#ecf0f1")
+        remove_button.pack(side='left', padx=10)
 
         # Complete Task button
-        complete_button = tk.Button(root, text="Complete Task", command=self.complete_task, font=('Arial', 12, 'bold'), bg="#f39c12", fg="#ecf0f1")
-        complete_button.grid(row=3, column=1, padx=10, pady=10, sticky="ew")
+        complete_button = tk.Button(button_frame, text="Complete Task", command=self.complete_task, font=('Arial', 12, 'bold'), bg="#f39c12", fg="#ecf0f1")
+        complete_button.pack(side='left', padx=10)
+
+        # Update Task button
+        update_button = tk.Button(button_frame, text="Update Task", command=self.update_task, font=('Arial', 12, 'bold'), bg="#3498db", fg="#ecf0f1")
+        update_button.pack(side='left', padx=10)
 
         self.task_listbox.bind('<Double-Button-1>', lambda event: self.complete_task())
 
@@ -65,6 +84,19 @@ class TodoListApp:
             self.tasks.append(completed_task)
             self.update_task_list()
 
+    def update_task(self):
+        selected_task_index = self.task_listbox.curselection()
+        if selected_task_index:
+            current_task = self.tasks[selected_task_index[0]]
+            new_task = simpledialog.askstring("Update Task", f"Update the task: {current_task}")
+            if new_task:
+                self.tasks[selected_task_index[0]] = new_task
+                self.update_task_list()
+            else:
+                messagebox.showwarning("Warning", "Please enter a valid task.")
+        else:
+            messagebox.showwarning("Warning", "Please select a task to update.")
+
     def update_task_list(self):
         self.task_listbox.delete(0, tk.END)
         for task in self.tasks:
@@ -74,3 +106,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = TodoListApp(root)
     root.mainloop()
+
