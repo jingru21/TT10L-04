@@ -18,33 +18,8 @@ win.attributes("-topmost", 1)
 menubar = Menu(win)
 win.config(menu=menubar)
 
-def open_todolist():
-    todolist_path = os.path.join(dirname, 'todo.py')
-    os.system(f'python "{todolist_path}"')
-
-def open_reminder():
-    reminder_path = os.path.join(dirname, 'reminder.py')
-    os.system(f'python "{reminder_path}"')
-
-# create the file_menu
-file_menu = Menu(menubar,tearoff=0)
-file_menu.add_command(label='To Do List', command=open_todolist)
-file_menu.add_separator()
-file_menu.add_command(label='Reminder', command=open_reminder)
-file_menu.add_separator()
-file_menu.add_command(label='Close')
-file_menu.add_separator()
-file_menu.add_command(label='Exit',command=win.destroy)
-
-menubar.add_cascade(label="File",menu=file_menu,underline=0)
-
-# help menu
-help_menu = Menu(menubar,tearoff=0)
-help_menu.add_command(label='About...')
-menubar.add_cascade(label="Help",menu=help_menu,underline=0)
-
 # add more selections from color theme
-color_theme = Menu(file_menu, tearoff=0)
+color_theme = Menu(tearoff=0)
 color_theme.add_command(label='Dark Theme', command=lambda: change_theme("dark"))
 color_theme.add_command(label='Light Theme', command=lambda: change_theme("light"))
 color_theme.add_command(label='Blue Theme', command=lambda: change_theme("blue"))
