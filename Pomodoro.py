@@ -4,13 +4,6 @@ import sys
 from button import Button  # Assuming you have a Button class implemented in button.py
 
 win = Tk()
-win.title("Welcome to Almanac!")
-
-# size
-win.geometry("500x400")
-win.minsize(width=400, height=200)
-
-# pinned
 win.attributes("-topmost", 1)
 pygame.init()
 
