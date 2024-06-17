@@ -141,4 +141,21 @@ calendar.bind("<<CalendarSelected>>", on_specific_date_selected)
 
 change_theme(current_theme)
 
+def open_todolist():
+    todolist_path = os.path.join(dirname, 'todo.py')
+    os.system(f'python "{todolist_path}"')
+
+def open_reminder():
+    reminder_path = os.path.join(dirname, 'reminder.py')
+    os.system(f'python "{reminder_path}"')
+
+exit_button = Button(win, text="Exit", command=win.destroy, bg="#F44336", fg="white", font=("Arial", 14, "bold"), padx=20, pady=10)
+exit_button.pack(side="right", padx=10, pady=10)
+
+todo_button = Button(win, text="To Do List", command=open_todolist, bg="#4CAF50", fg="white", font=("Arial", 14, "bold"), padx=20, pady=10)
+todo_button.pack(side="right", padx=10, pady=10)
+
+reminder_button = Button(win, text="Reminder", command=open_reminder, bg="#2196F3", fg="white", font=("Arial", 14, "bold"), padx=20, pady=10)
+reminder_button.pack(side="right", padx=10, pady=10)
+
 win.mainloop()
