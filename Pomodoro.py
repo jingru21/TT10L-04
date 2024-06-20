@@ -59,6 +59,7 @@ started = False
 
 # Main loop
 while True:
+   dt = CLOCK.tick(60)  # dt is the time since the last frame in milliseconds
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -78,7 +79,13 @@ while True:
 
     # Update timer if started
     if started and current_seconds > 0:
-        current_seconds -= 1
+        current_seconds -= dt / 1000 
+      
+     # If the timer reaches 0, stop the timer
+        if current_seconds <= 0:
+            current_seconds = 0
+            started = False
+            pygame.mixer.music.stop()  # Stop background music
 
     # Clear the screen
     SCREEN.fill("#ba4949")
@@ -93,11 +100,9 @@ while True:
     LONG_BREAK_BUTTON.update(SCREEN)
 
     # Render timer text
-    display_hours = current_seconds // 3600
-    remaining_seconds = current_seconds % 3600
-    display_minutes = remaining_seconds // 60
-    display_seconds = remaining_seconds % 60
-    timer_text = FONT.render(f"{display_hours:02}:{display_minutes:02}:{display_seconds:02}", True, "white")
+    display_minutes = int(current_seconds // 60)
+    display_seconds = int(current_seconds % 60)
+    timer_text = FONT.render(f"{display_minutes:02}:{display_seconds:02}", True, "white")
     timer_text_rect = timer_text.get_rect(center=(WIDTH/2, HEIGHT/2-25))
     SCREEN.blit(timer_text, timer_text_rect)
 
