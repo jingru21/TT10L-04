@@ -15,15 +15,24 @@ pygame.display.set_caption("Pomodoro Timer")
 # Clock for controlling frame rate
 CLOCK = pygame.time.Clock()
 
+import os
+
+# Change the current working directory
+new_directory = r'C:\Users\User\Downloads\CSP1123_Group-04\pomodoro'
+os.chdir(new_directory)
+
 # Load images
-BACKDROP = pygame.image.load(r"background.jpg")
+BACKDROP = pygame.image.load(r"backflower.jpg")
+# Resize the background image to match screen dimensions
+BACKDROP = pygame.transform.scale(BACKDROP, (WIDTH, HEIGHT))
+
 WHITE_BUTTON = pygame.image.load(r"button.png")
 
 # Load font
 FONT = pygame.font.Font(r"ArialRoundedMTBold.ttf", 120)
 
 # Load music
-pygame.mixer.music.load("bgm.mp3")  
+pygame.mixer.music.load("bgm.mp3.mp3")  
 
 # Initial timer settings
 POMODORO_LENGTH = 25 * 60  # 25 minutes in seconds
