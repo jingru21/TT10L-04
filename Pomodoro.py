@@ -16,7 +16,7 @@ pygame.display.set_caption("Pomodoro Timer")
 CLOCK = pygame.time.Clock()
 
 # Load images
-BACKDROP = pygame.image.load(r"blue.png")
+BACKDROP = pygame.image.load(r"background.jpg")
 WHITE_BUTTON = pygame.image.load(r"button.png")
 
 # Load font
