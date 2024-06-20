@@ -1,5 +1,8 @@
 from tkinter import Tk, Label, Button
 import os
+import sys
+
+email = sys.argv[1] if len(sys.argv) > 1 else "Unknown User"
 
 dirname = os.path.dirname(__file__)
 
