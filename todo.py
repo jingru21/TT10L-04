@@ -59,6 +59,10 @@ class TodoListApp:
         update_button = tk.Button(button_frame, text="Update Task", command=self.update_task, font=('Arial', 12, 'bold'), bg="#3498db", fg="#ecf0f1")
         update_button.pack(side='left', padx=10)
 
+        # Back button
+        back_button = tk.Button(button_frame, text="Back", command=root.destroy, font=('Arial', 12, 'bold'), bg="#9b59b6", fg="#ecf0f1")
+        back_button.pack(side='left', padx=10)
+
         self.task_listbox.bind('<Double-Button-1>', lambda event: self.complete_task())
 
     def add_task(self):
@@ -106,4 +110,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = TodoListApp(root)
     root.mainloop()
-

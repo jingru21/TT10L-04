@@ -184,7 +184,7 @@ def forgot_password():
     position_right = int(screen_width / 2 - window_width / 2)
     win.geometry(f'{window_width}x{window_height}+{position_right}+{position_top}')
     win.title('Forgot Password')
-    win.iconbitmap(r"C:\spcalendar\TT10L-04\images_login\aa.ico")
+    win.iconbitmap(r"images_login/aa.ico")
     win.configure(background='#f8f8f8')
     win.resizable(0, 0)
 
