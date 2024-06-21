@@ -4,13 +4,6 @@ import sys
 from button import Button  # Assuming you have a Button class implemented in button.py
 
 win = Tk()
-win.title("Welcome to Almanac!")
-
-# size
-win.geometry("500x400")
-win.minsize(width=400, height=200)
-
-# pinned
 win.attributes("-topmost", 1)
 pygame.init()
 
@@ -23,11 +16,11 @@ pygame.display.set_caption("Pomodoro Timer")
 CLOCK = pygame.time.Clock()
 
 # Load images
-BACKDROP = pygame.image.load("C:\CSP1123\GitProject\TT10L-04\\blue.png")
-WHITE_BUTTON = pygame.image.load("C:\CSP1123\GitProject\TT10L-04\\button.png")
+BACKDROP = pygame.image.load(r"blue.png")
+WHITE_BUTTON = pygame.image.load(r"button.png")
 
 # Load font
-FONT = pygame.font.Font("C:\CSP1123\GitProject\TT10L-04\ArialRoundedMTBold.ttf", 120)
+FONT = pygame.font.Font(r"ArialRoundedMTBold.ttf", 120)
 
 # Load music
 pygame.mixer.music.load("bgm.mp3")  
@@ -39,16 +32,16 @@ LONG_BREAK_LENGTH = 15 * 60  # 15 minutes in seconds
 
 # Create buttons
 START_STOP_BUTTON = Button(WHITE_BUTTON, (WIDTH/2, HEIGHT/2+100), 170, 60, "START", 
-                    pygame.font.Font("C:\CSP1123\GitProject\TT10L-04\ArialRoundedMTBold.ttf", 20), 
+                    pygame.font.Font(r"ArialRoundedMTBold.ttf", 20), 
                     "#c97676", "#9ab034")
 POMODORO_BUTTON = Button(None, (WIDTH/2-150, HEIGHT/2-140), 120, 30, "Pomodoro", 
-                pygame.font.Font("C:\CSP1123\GitProject\TT10L-04\ArialRoundedMTBold.ttf", 20), 
+                pygame.font.Font(r"ArialRoundedMTBold.ttf", 20), 
                 "#FFFFFF", "#9ab034")
 SHORT_BREAK_BUTTON = Button(None, (WIDTH/2, HEIGHT/2-140), 120, 30, "Short Break", 
-                            pygame.font.Font("C:\CSP1123\GitProject\TT10L-04\ArialRoundedMTBold.ttf", 20), 
+                            pygame.font.Font(r"ArialRoundedMTBold.ttf", 20), 
                             "#FFFFFF", "#9ab034")
 LONG_BREAK_BUTTON = Button(None, (WIDTH/2+150, HEIGHT/2-140), 120, 30, "Long Break", 
-                    pygame.font.Font("C:\CSP1123\GitProject\TT10L-04\ArialRoundedMTBold.ttf", 20), 
+                    pygame.font.Font(r"ArialRoundedMTBold.ttf", 20), 
                         "#FFFFFF", "#9ab034")
 
 # Initial timer state

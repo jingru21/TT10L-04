@@ -5,11 +5,12 @@ import threading
 import time
 
 class ReminderApp:
-    def _init_(self, master):
+    def __init__(self, master):
         self.master = master
         self.master.title("Reminder App")
         self.master.geometry("400x500")
         self.master.configure(bg="#F3E5F5")
+        self.master.attributes("-topmost", 1)
         
         self.reminders = []
 
@@ -147,5 +148,5 @@ def main():
     app = ReminderApp(root)
     root.mainloop()
 
-if _name_ == "_main_":
-    main()
+if __name__ == "__main__":
+    main()
