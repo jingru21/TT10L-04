@@ -3,7 +3,7 @@ import time
 import math
 import os
 
-dirname = os.path.dirname(_file_)
+dirname = os.path.dirname(__file__)
 
 win = Tk()
 win.title("High-Class Clock")
