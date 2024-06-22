@@ -10,9 +10,6 @@ win.title("Almanac")
 win.state('zoomed')
 win.minsize(width=400, height=200)
 
-# pinned
-win.attributes("-topmost", 1)
-
 # create a menubar
 menubar = Menu(win)
 win.config(menu=menubar)
