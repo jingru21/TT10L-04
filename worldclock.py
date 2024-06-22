@@ -1,10 +1,20 @@
-from tkinter import Tk, Frame, Label, StringVar, Button
+from tkinter import Tk, Frame, Label, StringVar, Button, PhotoImage
 from datetime import datetime
 from tkinter.ttk import Combobox
 import pytz
+import os
 
 win = Tk()
 win.title("World Clock")
+
+os.chdir(r'C:\Users\User\Downloads\CSP1123_Group-04')
+
+#Load Background image
+bg_image = PhotoImage(file="worldmapp.png")
+
+# Create a Label widget to display the background image
+background_label = Label(win, image=bg_image)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 # size
 win.geometry("500x400")
@@ -25,17 +35,13 @@ def refresh_window():
         update_europe()
 
 #label
-Label(win, text = "Select the Continents :",
-      font = ("Times New Roman", 14)).grid(column = 0, row =0, padx = 10, pady = 25)
+Label(win, text = "Select the Continents :",font = ("Times New Roman", 14)).grid(column = 0, row =0, padx = 10, pady = 25)
 
 #Combobox
 n = StringVar()
 continents_cb = Combobox(win, width = 27, textvariable = n)
 
-continents_cb['values'] = ('Africa',
-                           'America',
-                           'Asia',
-                           'Europe')
+continents_cb['values'] = ('Africa', 'America','Asia','Europe')
 
 continents_cb.grid(column=1, row=0, padx=10, pady=25)
 
@@ -327,13 +333,13 @@ clock8=Label(f8, font=("Helvetica", 20))
 clock8.place(x=5, y=80)
 
 refresh_label = Label(win, text="Click the button to refresh the window.", font=("Times New Roman", 12))
-refresh_label.place(x=20, y=500)
+refresh_label.place(x=40, y=520)
 
 refresh_button = Button(win, text="Refresh", command=refresh_window, font=("Times New Roman", 12))
-refresh_button.place(x=300, y=500)
+refresh_button.place(x=300, y=520)
 
 button_exit=Button(win, text="BACK", command=win.destroy, width=30, height=2)
-button_exit.place(x=1000,y=580)
+button_exit.place(x=1000,y=520)
 
 continents_cb.current()
 continents_cb.bind("<<ComboboxSelected>>",continents_changed)
