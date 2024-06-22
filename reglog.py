@@ -4,6 +4,7 @@ import sqlite3
 from tkinter import messagebox
 import re
 import subprocess
+import atexit
 
 window = Tk()
 window.rowconfigure(0, weight=1)
@@ -32,17 +33,15 @@ show_frame(LoginPage)
 def validate_email(email):
     email_regex = r'^[a-zA-Z0-9_.+-]+@gmail\.com$'
     return re.match(email_regex, email)
+
 # ========== DATABASE VARIABLES ============
 Email = StringVar()
 FullName = StringVar()
 Password = StringVar()
 ConfirmPassword = StringVar()
 
-# =====================================================================================================================
-# =====================================================================================================================
+
 # ==================== LOGIN PAGE =====================================================================================
-# =====================================================================================================================
-# =====================================================================================================================
 
 design_frame1 = Listbox(LoginPage, bg='#E0B0FF', width=115, height=50, highlightthickness=0, borderwidth=0)
 design_frame1.place(x=0, y=0)
@@ -162,17 +161,16 @@ def login():
     result = cursor.fetchall()
     if result:
         messagebox.showinfo("Success", 'Logged in Successfully.')
-        subprocess.run(['python', 'import.py', email_entry.get()])
+        atexit.register(run_import_script, email_entry.get())
+        window.destroy()
     else:
         messagebox.showerror("Failed", "Wrong Login details, please try again.")
 
+def run_import_script(email):
+    subprocess.run(['python', 'import.py', email])
 
-# ===================================================================================================================
-# ===================================================================================================================
+
 # === FORGOT PASSWORD  PAGE =========================================================================================
-# ===================================================================================================================
-# ===================================================================================================================
-
 
 def forgot_password():
     win = Toplevel()
@@ -184,7 +182,7 @@ def forgot_password():
     position_right = int(screen_width / 2 - window_width / 2)
     win.geometry(f'{window_width}x{window_height}+{position_right}+{position_top}')
     win.title('Forgot Password')
-    win.iconbitmap(r"C:\spcalendar\TT10L-04\images_login\aa.ico")
+    win.iconbitmap(r"images_login/aa.ico")
     win.configure(background='#f8f8f8')
     win.resizable(0, 0)
 
@@ -249,11 +247,7 @@ forgotPassword.place(x=290, y=290)
 
 
 
-# =====================================================================================================================
-# =====================================================================================================================
 # ==================== REGISTRATION PAGE ==============================================================================
-# =====================================================================================================================
-# =====================================================================================================================
 
 design_frame5 = Listbox(RegistrationPage, bg='#E0B0FF', width=115, height=50, highlightthickness=0, borderwidth=0)
 design_frame5.place(x=0, y=0)
@@ -378,11 +372,8 @@ side_image_label.image = photo
 side_image_label.place(x=50, y=10)
 
 
-# =====================================================================================================================
-# =====================================================================================================================
+
 # ==================== DATABASE CONNECTION ============================================================================
-# =====================================================================================================================
-# =====================================================================================================================
 
 connection = sqlite3.connect('RegLog.db')
 cur = connection.cursor()
