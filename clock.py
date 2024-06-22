@@ -117,9 +117,5 @@ button_exit = Button(button_frame, text="BACK", command=win.destroy, width=15, h
 button_exit.grid(row=0, column=2, padx=10)
 
 win.mainloop()
-blue and grey
-button_exit=Button(text="BACK", command=win.destroy, width=55, height=4)
-button_exit.place(x=900,y=580)
 
-
-win.mainloop()
+#done

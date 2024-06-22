@@ -7,12 +7,8 @@ dirname = os.path.dirname(__file__)
 win = Tk()
 win.title("Almanac")
 
-# size
-win.geometry("500x400")
+win.state('zoomed')
 win.minsize(width=400, height=200)
-
-# pinned
-win.attributes("-topmost", 1)
 
 # create a menubar
 menubar = Menu(win)
@@ -159,3 +155,5 @@ reminder_button = Button(win, text="Reminder", command=open_reminder, bg="#2196F
 reminder_button.pack(side="right", padx=10, pady=10)
 
 win.mainloop()
+
+#done

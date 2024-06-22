@@ -4,6 +4,7 @@ import sqlite3
 from tkinter import messagebox
 import re
 import subprocess
+import atexit
 
 window = Tk()
 window.rowconfigure(0, weight=1)
@@ -162,11 +163,13 @@ def login():
     result = cursor.fetchall()
     if result:
         messagebox.showinfo("Success", 'Logged in Successfully.')
-        subprocess.run(['python', 'import.py', email_entry.get()])
+        atexit.register(run_import_script, email_entry.get())
+        window.destroy()
     else:
         messagebox.showerror("Failed", "Wrong Login details, please try again.")
 
-
+def run_import_script(email):
+    subprocess.run(['python', 'import.py', email])
 # ===================================================================================================================
 # ===================================================================================================================
 # === FORGOT PASSWORD  PAGE =========================================================================================
@@ -184,7 +187,7 @@ def forgot_password():
     position_right = int(screen_width / 2 - window_width / 2)
     win.geometry(f'{window_width}x{window_height}+{position_right}+{position_top}')
     win.title('Forgot Password')
-    win.iconbitmap(r"C:\spcalendar\TT10L-04\images_login\aa.ico")
+    win.iconbitmap(r"images_login/aa.ico")
     win.configure(background='#f8f8f8')
     win.resizable(0, 0)
 
@@ -440,3 +443,5 @@ def submit():
 
 
 window.mainloop()
+
+#done

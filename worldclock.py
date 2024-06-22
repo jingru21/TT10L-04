@@ -7,10 +7,8 @@ import os
 win = Tk()
 win.title("World Clock")
 
-os.chdir(r'C:\Users\User\Downloads\CSP1123_Group-04')
-
 #Load Background image
-bg_image = PhotoImage(file="worldmapp.png")
+bg_image = PhotoImage(file=r"worldmapp.png")
 
 # Create a Label widget to display the background image
 background_label = Label(win, image=bg_image)
@@ -345,3 +343,5 @@ continents_cb.current()
 continents_cb.bind("<<ComboboxSelected>>",continents_changed)
 
 win.mainloop()
+
+#done
