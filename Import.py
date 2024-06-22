@@ -10,8 +10,7 @@ win = Tk()
 win.title("Welcome to Almanac!")
 
 # size
-win.geometry("500x400")
-win.minsize(width=400, height=200)
+win.state('zoomed')
 
 #bgcolor
 win.config(bg="#797EF6")

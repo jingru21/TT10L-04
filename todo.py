@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
+import sqlite3
 
 class TodoListApp:
     def __init__(self, root):
@@ -9,6 +10,7 @@ class TodoListApp:
         self.root.config(bg="#34495e")
 
         self.tasks = []
+        self.setup_db()
 
         # Main frame
         main_frame = tk.Frame(root, bg="#34495e")
@@ -65,10 +67,25 @@ class TodoListApp:
 
         self.task_listbox.bind('<Double-Button-1>', lambda event: self.complete_task())
 
+        self.load_tasks()
+
+    def setup_db(self):
+        self.conn = sqlite3.connect('reglog.db')
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                task TEXT NOT NULL,
+                status TEXT NOT NULL
+            )
+        """)
+        self.conn.commit()
+
     def add_task(self):
         task = self.task_entry.get()
         if task:
-            self.tasks.append(task)
+            self.cursor.execute("INSERT INTO tasks (task, status) VALUES (?, ?)", (task, 'incomplete'))
+            self.conn.commit()
             self.update_task_list()
             self.task_entry.delete(0, tk.END)
         else:
@@ -77,36 +94,51 @@ class TodoListApp:
     def remove_task(self):
         selected_task_index = self.task_listbox.curselection()
         if selected_task_index:
-            self.tasks.pop(selected_task_index[0])
+            task_id = self.tasks[selected_task_index[0]][0]
+            self.cursor.execute("DELETE FROM tasks WHERE id=?", (task_id,))
+            self.conn.commit()
             self.update_task_list()
 
     def complete_task(self):
         selected_task_index = self.task_listbox.curselection()
         if selected_task_index:
-            completed_task = self.tasks.pop(selected_task_index[0])
-            completed_task = f"[Done] {completed_task}"
-            self.tasks.append(completed_task)
+            task_id = self.tasks[selected_task_index[0]][0]
+            self.cursor.execute("UPDATE tasks SET status='complete' WHERE id=?", (task_id,))
+            self.conn.commit()
             self.update_task_list()
 
     def update_task(self):
         selected_task_index = self.task_listbox.curselection()
         if selected_task_index:
             current_task = self.tasks[selected_task_index[0]]
-            new_task = simpledialog.askstring("Update Task", f"Update the task: {current_task}")
+            new_task = simpledialog.askstring("Update Task", f"Update the task: {current_task[1]}")
             if new_task:
-                self.tasks[selected_task_index[0]] = new_task
+                self.cursor.execute("UPDATE tasks SET task=? WHERE id=?", (new_task, current_task[0]))
+                self.conn.commit()
                 self.update_task_list()
             else:
                 messagebox.showwarning("Warning", "Please enter a valid task.")
         else:
             messagebox.showwarning("Warning", "Please select a task to update.")
 
+    def load_tasks(self):
+        self.cursor.execute("SELECT * FROM tasks")
+        self.tasks = self.cursor.fetchall()
+        self.update_task_list()
+
     def update_task_list(self):
         self.task_listbox.delete(0, tk.END)
+        self.load_tasks()
         for task in self.tasks:
-            self.task_listbox.insert(tk.END, task)
+            task_text = f"{task[1]} ({task[2]})"
+            self.task_listbox.insert(tk.END, task_text)
+
+    def on_closing(self):
+        self.conn.close()
+        self.root.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = TodoListApp(root)
+    root.protocol("WM_DELETE_WINDOW", app.on_closing)
     root.mainloop()
