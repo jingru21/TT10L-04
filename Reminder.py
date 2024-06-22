@@ -179,8 +179,7 @@ def main():
     root = tk.Tk()
     root.withdraw()
 
-    FullName = simpledialog.askstring("FullName", "Enter your user Full Name:")
-    root.attributes("-topmost",1)
+    FullName = simpledialog.askinteger("FullName", "Enter your user Full Name:")
     
     if FullName is not None:
         root.deiconify()
