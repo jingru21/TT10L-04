@@ -1,25 +1,25 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 import sqlite3
+import os
 
 class TodoListApp:
-    def __init__(self, root):
+    def __init__(self, root, FullName):
         self.root = root
-        self.root.title("To-Do List")
+        self.FullName = FullName
+        self.root.title(f"To-Do List - {FullName}")
         self.root.geometry("600x550")
         self.root.config(bg="#34495e")
 
-        self.tasks = []
-
-        # Initialize database
-        self.init_db()
+        self.db_filename = os.path.join(os.path.dirname(__file__), 'Reglog.db')
+        self.setup_db()
 
         # Main frame
         main_frame = tk.Frame(root, bg="#34495e")
         main_frame.pack(expand=True, fill='both', padx=20, pady=20)
 
         # Title label
-        title_label = tk.Label(main_frame, text="My To-Do List", font=('Arial', 20, 'bold'), bg="#34495e", fg="#ecf0f1")
+        title_label = tk.Label(main_frame, text=f"My To-Do List - {FullName}", font=('Arial', 20, 'bold'), bg="#34495e", fg="#ecf0f1")
         title_label.pack(pady=20)
 
         # Task entry frame
@@ -71,13 +71,14 @@ class TodoListApp:
         # Handle window close event
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
-    def init_db(self):
-        self.conn = sqlite3.connect("todo.db")
+    def setup_db(self):
+        self.conn = sqlite3.connect(self.db_filename)
         self.cursor = self.conn.cursor()
-        # Create the tasks table with the status column if it doesn't exist
+        # Create the tasks table for the current user if it doesn't exist
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS tasks (
                 id INTEGER PRIMARY KEY,
+                FullName TEXT NOT NULL,
                 task TEXT NOT NULL,
                 status TEXT NOT NULL
             )
@@ -85,7 +86,7 @@ class TodoListApp:
         self.conn.commit()
 
     def load_tasks(self):
-        self.cursor.execute("SELECT task, status FROM tasks")
+        self.cursor.execute("SELECT task, status FROM tasks WHERE FullName=? ORDER BY id", (self.FullName,))
         rows = self.cursor.fetchall()
         self.tasks = [f"{'[Done] ' if row[1] == 'done' else ''}{row[0]}" for row in rows]
         self.update_task_list()
@@ -93,7 +94,7 @@ class TodoListApp:
     def add_task(self):
         task = self.task_entry.get()
         if task:
-            self.cursor.execute("INSERT INTO tasks (task, status) VALUES (?, ?)", (task, 'pending'))
+            self.cursor.execute("INSERT INTO tasks (FullName, task, status) VALUES (?, ?, ?)", (self.FullName, task, 'pending'))
             self.conn.commit()
             self.tasks.append(task)
             self.update_task_list()
@@ -106,7 +107,7 @@ class TodoListApp:
         selected_task_index = self.task_listbox.curselection()
         if selected_task_index:
             task = self.tasks[selected_task_index[0]].replace('[Done] ', '')
-            self.cursor.execute("DELETE FROM tasks WHERE task = ?", (task,))
+            self.cursor.execute("DELETE FROM tasks WHERE FullName=? AND task=?", (self.FullName, task))
             self.conn.commit()
             self.tasks.pop(selected_task_index[0])
             self.update_task_list()
@@ -116,7 +117,7 @@ class TodoListApp:
         selected_task_index = self.task_listbox.curselection()
         if selected_task_index:
             task = self.tasks.pop(selected_task_index[0]).replace('[Done] ', '')
-            self.cursor.execute("UPDATE tasks SET status = ? WHERE task = ?", ('done', task))
+            self.cursor.execute("UPDATE tasks SET status=? WHERE FullName=? AND task=?", ('done', self.FullName, task))
             self.conn.commit()
             completed_task = f"[Done] {task}"
             self.tasks.append(completed_task)
@@ -129,7 +130,7 @@ class TodoListApp:
             current_task = self.tasks[selected_task_index[0]].replace('[Done] ', '')
             new_task = simpledialog.askstring("Update Task", f"Update the task: {current_task}")
             if new_task:
-                self.cursor.execute("UPDATE tasks SET task = ? WHERE task = ?", (new_task, current_task))
+                self.cursor.execute("UPDATE tasks SET task=? WHERE FullName=? AND task=?", (new_task, self.FullName, current_task))
                 self.conn.commit()
                 self.tasks[selected_task_index[0]] = new_task if '[Done]' not in self.tasks[selected_task_index[0]] else f"[Done] {new_task}"
                 self.update_task_list()
@@ -151,6 +152,10 @@ class TodoListApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = TodoListApp(root)
-    root.mainloop()
+    FullName = simpledialog.askstring("FullName", "Enter your user Full Name:")
+    if FullName:
+        app = TodoListApp(root, FullName)
+        root.mainloop()
+    else:
+        messagebox.showerror("Error", "Full Name is required.")
 
