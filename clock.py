@@ -26,6 +26,8 @@ win.config(bg=bg_color)
 win.attributes("-topmost", 1)
 
 def update_digital_clock():
+    timeVar = time.strftime("%H:%M:%S %p")
+    digital_clock.config(text=timeVar)
     digital_clock.after(200, update_digital_clock)
 
 def update_analog_clock():
