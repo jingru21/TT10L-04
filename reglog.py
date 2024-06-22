@@ -3,6 +3,7 @@ from PIL import ImageTk, Image
 import sqlite3
 from tkinter import messagebox
 import re
+import subprocess
 
 window = Tk()
 window.rowconfigure(0, weight=1)
@@ -12,7 +13,7 @@ window.resizable(0, 0)
 window.title('Login and Registration Page')
 
 # Window Icon Photo
-icon = PhotoImage(file=r"C:\spcalendar\TT10L-04\images_login\pic-icon.png")
+icon = PhotoImage(file=r"images_login/pic-icon.png")
 window.iconphoto(True, icon)
 
 LoginPage = Frame(window)
@@ -110,28 +111,28 @@ loginBtn1.place(x=133, y=340, width=256, height=50)
 # ======= ICONS =================
 
 # ===== Email icon =========
-email_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\email-icon.png")
+email_icon = Image.open(r"images_login/email-icon.png")
 photo = ImageTk.PhotoImage(email_icon)
 emailIcon_label = Label(design_frame4, image=photo, bg='#f8f8f8')
 emailIcon_label.image = photo
 emailIcon_label.place(x=105, y=174)
 
 # ===== password icon =========
-password_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\pass-icon.png")
+password_icon = Image.open(r"images_login/pass-icon.png")
 photo = ImageTk.PhotoImage(password_icon)
 password_icon_label = Label(design_frame4, image=photo, bg='#f8f8f8')
 password_icon_label.image = photo
 password_icon_label.place(x=105, y=254)
 
 # ===== picture icon =========
-picture_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\pic-icon.png")
+picture_icon = Image.open(r"images_login/pic-icon.png")
 photo = ImageTk.PhotoImage(picture_icon)
 picture_icon_label = Label(design_frame4, image=photo, bg='#f8f8f8')
 picture_icon_label.image = photo
 picture_icon_label.place(x=280, y=5)
 
 # ===== Left Side Picture ============
-side_image = Image.open(r"C:\spcalendar\TT10L-04\images_login\vector.png")
+side_image = Image.open(r"images_login/vector.png")
 photo = ImageTk.PhotoImage(side_image)
 side_image_label = Label(design_frame3, image=photo, bg='#B19CD9')
 side_image_label.image = photo
@@ -161,6 +162,7 @@ def login():
     result = cursor.fetchall()
     if result:
         messagebox.showinfo("Success", 'Logged in Successfully.')
+        subprocess.run(['python', 'import.py', email_entry.get()])
     else:
         messagebox.showerror("Failed", "Wrong Login details, please try again.")
 
@@ -334,42 +336,42 @@ signUp2 = Button(design_frame8, fg='#f8f8f8', text='Sign Up', bg='#1b87d2', font
 signUp2.place(x=285, y=435, width=286, height=50)
 
 # ===== password icon =========
-password_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\pass-icon.png")
+password_icon = Image.open(r"images_login/pass-icon.png")
 photo = ImageTk.PhotoImage(password_icon)
 password_icon_label = Label(design_frame8, image=photo, bg='#f8f8f8')
 password_icon_label.image = photo
 password_icon_label.place(x=255, y=300)
 
 # ===== confirm password icon =========
-confirmPassword_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\pass-icon.png")
+confirmPassword_icon = Image.open(r"images_login/pass-icon.png")
 photo = ImageTk.PhotoImage(confirmPassword_icon)
 confirmPassword_icon_label = Label(design_frame8, image=photo, bg='#f8f8f8')
 confirmPassword_icon_label.image = photo
 confirmPassword_icon_label.place(x=255, y=390)
 
 # ===== Email icon =========
-email_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\email-icon.png")
+email_icon = Image.open(r"images_login/email-icon.png")
 photo = ImageTk.PhotoImage(email_icon)
 emailIcon_label = Label(design_frame8, image=photo, bg='#f8f8f8')
 emailIcon_label.image = photo
 emailIcon_label.place(x=255, y=225)
 
 # ===== Full Name icon =========
-name_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\name-icon.png")
+name_icon = Image.open(r"images_login/name-icon.png")
 photo = ImageTk.PhotoImage(name_icon)
 nameIcon_label = Label(design_frame8, image=photo, bg='#f8f8f8')
 nameIcon_label.image = photo
 nameIcon_label.place(x=252, y=153)
 
 # ===== picture icon =========
-picture_icon = Image.open(r"C:\spcalendar\TT10L-04\images_login\pic-icon.png")
+picture_icon = Image.open(r"images_login/pic-icon.png")
 photo = ImageTk.PhotoImage(picture_icon)
 picture_icon_label = Label(design_frame8, image=photo, bg='#f8f8f8')
 picture_icon_label.image = photo
 picture_icon_label.place(x=280, y=5)
 
 # ===== Left Side Picture ============
-side_image = Image.open(r"C:\spcalendar\TT10L-04\images_login\vector.png")
+side_image = Image.open(r"images_login/vector.png")
 photo = ImageTk.PhotoImage(side_image)
 side_image_label = Label(design_frame7, image=photo, bg='#B19CD9')
 side_image_label.image = photo
