@@ -1,18 +1,22 @@
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import simpledialog, messagebox, ttk
 import datetime
+import sqlite3
 import threading
+import os
 import time
 
 class ReminderApp:
-    def __init__(self, master):
+    def __init__(self, master, FullName):
         self.master = master
         self.master.title("Reminder App")
         self.master.geometry("400x500")
         self.master.configure(bg="#F3E5F5")
         self.master.attributes("-topmost", 1)
         
-        self.reminders = []
+        self.FullName = FullName
+        self.db_filename = os.path.join(os.path.dirname(__file__), 'Reglog.db')
+        self.setup_db()
 
         # Styling variables
         label_font = ("Helvetica", 12, "bold")
@@ -85,6 +89,22 @@ class ReminderApp:
         self.delete_reminder_button = tk.Button(master, text="Delete Reminder", font=button_font, command=self.delete_reminder, bg=button_bg_color, fg=button_fg_color, bd=2, relief="raised")
         self.delete_reminder_button.pack(pady=20)
         
+        self.load_reminders()
+
+    def setup_db(self):
+        conn = sqlite3.connect(self.db_filename)
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS reminders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                FullName STRING NOT NULL,
+                message TEXT NOT NULL,
+                reminder_time TEXT NOT NULL
+            )
+        """)
+        conn.commit()
+        conn.close()
+
     def set_reminder(self):
         reminder_message = self.reminder_message_entry.get()
         reminder_year = self.year_var.get()
@@ -92,7 +112,7 @@ class ReminderApp:
         reminder_day = self.day_var.get()
         reminder_hour = self.hour_var.get()
         reminder_minute = self.minute_var.get()
-        
+    
         try:
             reminder_date_str = f"{reminder_year}-{reminder_month}-{reminder_day}"
             reminder_time_str = f"{reminder_hour}:{reminder_minute}"
@@ -100,53 +120,74 @@ class ReminderApp:
             reminder_time = datetime.datetime.strptime(reminder_time_str, "%H:%M")
             current_datetime = datetime.datetime.now().replace(second=0, microsecond=0)
             reminder_datetime = reminder_date.replace(hour=reminder_time.hour, minute=reminder_time.minute)
-            
+        
             if reminder_datetime < current_datetime:
                 messagebox.showerror("Error", "Reminder time should be in the future.")
                 return
-            
-            reminder_data = {
-                "message": reminder_message,
-                "time": reminder_datetime
-            }
-            self.reminders.append(reminder_data)
-            self.update_reminder_list()
-            self.schedule_reminder(reminder_data)
+        
+            conn = sqlite3.connect(self.db_filename)
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO reminders (FullName, message, reminder_time) VALUES (?, ?, ?)", 
+                            (self.FullName, reminder_message, reminder_datetime.strftime("%Y-%m-%d %H:%M")))
+            conn.commit()
+            conn.close()
+
+            self.load_reminders()
+            self.schedule_reminder(reminder_message, reminder_datetime)
             messagebox.showinfo("Success", "Reminder set successfully.")
-            
+        
         except ValueError:
             messagebox.showerror("Error", "Invalid date or time format.")
         
-    def update_reminder_list(self):
+    def load_reminders(self):
         self.reminder_listbox.delete(0, tk.END)
-        for index, reminder in enumerate(self.reminders):
-            self.reminder_listbox.insert(tk.END, f"{index + 1}. {reminder['time'].strftime('%Y-%m-%d %H:%M')} - {reminder['message']}")
-        
+        conn = sqlite3.connect(self.db_filename)
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM reminders WHERE FullName=? ORDER BY reminder_time", (self.FullName,))
+        self.reminders = cursor.fetchall()
+        conn.close()
+
+        for reminder in self.reminders:
+            self.reminder_listbox.insert(tk.END, f"{reminder[2]} - {reminder[3]}")
+
     def delete_reminder(self):
         selected_index = self.reminder_listbox.curselection()
-        if not selected_index:
-            messagebox.showerror("Error", "Please select a reminder to delete.")
-            return
-        
-        reminder_index = selected_index[0]
-        del self.reminders[reminder_index]
-        self.update_reminder_list()
-        
-    def schedule_reminder(self, reminder_data):
-        def reminder_thread():
-            while True:
-                current_time = datetime.datetime.now().replace(second=0, microsecond=0)
-                if current_time == reminder_data["time"]:
-                    messagebox.showinfo("Reminder", reminder_data["message"])
-                    break
-                time.sleep(60)  # Check every minute
-        
-        threading.Thread(target=reminder_thread, daemon=True).start()
+        if selected_index:
+            reminder_FullName = self.reminders[selected_index[0]][0]
+            conn = sqlite3.connect(self.db_filename)
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM reminders WHERE FullName=?", (reminder_FullName,))
+            conn.commit()
+            conn.close()
+            
+            self.load_reminders()
+
+    def show_reminder(self, message):
+        messagebox.showinfo("Reminder", message)
+
+    def schedule_reminder(self, message, reminder_datetime):
+        reminder_thread = threading.Thread(target=self.reminder_thread_func, args=(message, reminder_datetime))
+        reminder_thread.start()
+
+    def reminder_thread_func(self, message, reminder_datetime):
+        current_time = datetime.datetime.now()
+        delta = reminder_datetime - current_time
+        time.sleep(delta.total_seconds())
+        self.show_reminder(message)
 
 def main():
     root = tk.Tk()
-    app = ReminderApp(root)
-    root.mainloop()
+    root.withdraw()
+
+    FullName = simpledialog.askstring("FullName", "Enter your user Full Name:")
+    root.attributes("-topmost",1)
+    
+    if FullName is not None:
+        root.deiconify()
+        app = ReminderApp(root, FullName)
+        root.mainloop()
+    else:
+        messagebox.showerror("Error", "Full Name is required.")
 
 if __name__ == "__main__":
     main()
