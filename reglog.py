@@ -4,6 +4,7 @@ import sqlite3
 from tkinter import messagebox
 import re
 import subprocess
+import atexit
 
 window = Tk()
 window.rowconfigure(0, weight=1)
@@ -162,10 +163,13 @@ def login():
     result = cursor.fetchall()
     if result:
         messagebox.showinfo("Success", 'Logged in Successfully.')
-        subprocess.run(['python', 'import.py', email_entry.get()])
+        atexit.register(run_import_script, email_entry.get())
+        window.destroy()
     else:
         messagebox.showerror("Failed", "Wrong Login details, please try again.")
 
+def run_import_script(email):
+    subprocess.run(['python', 'import.py', email])
 
 # ===================================================================================================================
 # ===================================================================================================================
